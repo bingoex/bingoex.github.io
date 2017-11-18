@@ -1,26 +1,19 @@
 ---
 layout: page
-title: About
-description: 打码改变世界
-keywords: Zhuang Ma, 马壮
+title: 关于我
+description: 最近会将很久之前总结的相关笔记整理成文章，以作总结。侵即删
+keywords: HaiBinWu, bingo
 comments: true
 menu: 关于
 permalink: /about/
 ---
-
-我是马壮，码而生，码而立。
-
-仰慕「优雅编码的艺术」。
-
-坚信熟能生巧，努力改变人生。
-
-## 联系
+## 联系方式
 
 {% for website in site.data.social %}
 * {{ website.sitename }}：[@{{ website.name }}]({{ website.url }})
 {% endfor %}
 
-## Skill Keywords
+## 技能
 
 {% for category in site.data.skills %}
 ### {{ category.name }}
