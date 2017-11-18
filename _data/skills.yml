@@ -1,19 +1,28 @@
-- name: Software Engineer Keywords
+- name: 熟悉语言
   keywords:
       - Java
       - C++
+
+- name: 用过
+  keywords:
+      - GO
       - Python
-      - Design Patterns
+      - PHP
+      - HTML
+      - JS
+      - CSS
+      - Shell
+      - Git
+      - Maven
+      - Svn
 
-- name: Mobile Developer Keywords
+- name: 常用开发工具
   keywords:
-      - Android
-      - Reverse Engineering
+      - Intellij
+      - VIM
+      - Sublime
 
-- name: Windows Developer Keywords
+- name: 数据库技能
   keywords:
-      - Win32 SDK
-      - DuiLib
-      - WTL
-      - COM
-      - WinDbg
+      - Mysql
+      - Redis
