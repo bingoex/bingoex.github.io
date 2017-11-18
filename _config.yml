@@ -15,7 +15,7 @@ side_bar_repo_limit: 5
 # ---------------- #
 #      Author      #
 # ---------------- #
-author: wuhaibinmr@163.com
+author: haibinwumr@163.com
 organization: CSDN
 organization_url: http://blog.csdn.net/b2222505/
 github_username: bingoex
@@ -103,7 +103,7 @@ gitalk:
     clientID: 043afe03b3470a335ba2
     clientSecret: 34337e2a4011448b815542627be6d76545fe9299
 # 在使用其它评论组件时可点击显示 Disqus
-lazy_load_disqus : false
+lazy_load_disqus : true
 
 # ---------------- #
 #    Analytics     #
