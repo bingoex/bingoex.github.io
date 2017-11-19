@@ -6,6 +6,7 @@ description: Effective C++读书笔记
 keywords: C++, effective C++
 ---
 
+本文只是简单记录了effective C＋＋的一些重要笔记， 无个人总结。
 
 # 一、让自己习惯C++
  
