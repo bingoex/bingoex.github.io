@@ -31,15 +31,15 @@ keywords: C++, effective C++
  
 # 二、构造、析构、赋值运算
 
-#### 条款05：了解C++默默编写并调用哪些函数
+#### 条款05：了解C++默认编写并调用哪些函数
 1. 编译器可以暗自为class创建default构造函数、copy构造函数、copyassignment操作符，以及析构函数
  
 #### 条款06：若不想使用编译器自动生成的函数，就该明确拒绝
 1. 为驳回编译器自动提供的技能，可将相应的成员函数声明为private并且不予实现。使用像Uncopyable这样的base class也是一种做法。
  
 #### 条款07：为多态基类声明virtual析构函数
-1、polymorphic（带多态性质的）baseclasses应该声明一个virtual析构函数。如果class带有任何virtual函数。它应该拥有一个virtual析构函数。
-2、Classse的设计目的如果不是作为baseclasses使用，或不是为了具备多态性，就不该声明virtual析构函数。
+1. polymorphic（带多态性质的）baseclasses应该声明一个virtual析构函数。如果class带有任何virtual函数。它应该拥有一个virtual析构函数。
+2. Classse的设计目的如果不是作为baseclasses使用，或不是为了具备多态性，就不该声明virtual析构函数。
  
 #### 条款08：别让异常逃离析构函数
 1. 析构函数绝对不要吐出异常。如果一个被析构函数调用的函数可能抛出异常，析构函数应该捕捉任何异常，然后吞下它们（不传播）或者结束程序。
@@ -49,7 +49,7 @@ keywords: C++, effective C++
 1. 在构造和析构期间不要调用virtual函数，因为这类调用从不下降至derived class（在base构造函数中调用virtual函数时调用base class的，而不是derived class的）。而应该将必要的参数从derived的构造函数传递给base的构造函数
 ![](/images/posts/2015-08-17-effect-c-book/1.png)
 
- #### 条款10：令operator=返回一个refrence to *this
+#### 条款10：令operator=返回一个refrence to *this
  
 #### 条款11：在operator=中处理“自我赋值”
 1. 确保当对象自我赋值时operator=有良好行为。其中技术包括比较“来源对象”和“目标对象”的地址、精心周到的语句顺序、及其copy-and-swap。
@@ -61,11 +61,11 @@ keywords: C++, effective C++
  
  
  
-三、资源管理
+# 三、资源管理
  
 #### 条款13：以对象管理资源
 1. 为防止资源泄露，请使用RAII对象，他们在构造函数中获得资源并在析构函数中释放资源。
-2. 两个常被使用的RAII classes分别是tr1::shared_ptr和auto_ptr（他们都不适合管理new[]分配的资源。shared_ptr可以知道删除器函数）。前置通常是较佳选择，因为其copy行为比较直观。若选择auto_ptr，复制动作会使它（被复制物）指向null。
+2. 两个常被使用的RAII classes分别是tr1::shared_ptr和auto_ptr（他们都不适合管理new[]分配的资源。shared_ptr可以知道删除器函数）。前者通常是较佳选择，因为其copy行为比较直观。若选择auto_ptr，复制动作会使它（被复制物）指向null。
  
 #### 条款14：在资源管理类中小心coping行为
 1. 复制RAII（resourceacquisition is initialzation）对象必现一并复制它所管理的资源，所以资源的copying行为决定RAII对象的copying行为。
@@ -77,6 +77,7 @@ keywords: C++, effective C++
  
 #### 条款16：成对使用new和delete时要采用相同的形式
 1. 如果你再new表达式中使用[]，必须在相应的delete表达式中也使用[]（尽量使用string、vector代替）。
+
 ![](/images/posts/2015-08-17-effect-c-book/2.png)
  
 #### 条款17：以独立语句将newed对象置入智能指针
@@ -84,7 +85,7 @@ keywords: C++, effective C++
  
  
  
-四、设计与声明
+# 四、设计与声明
 
 #### 条款18：让接口容易被正确使用，不易被误用
 1. 好的接口很容易被正确使用，不容易被误用。
@@ -118,7 +119,7 @@ keywords: C++, effective C++
  
  
  
-五、实现
+# 五、实现
  
 #### 条款26：尽可能延后变量定义式的出现时间
  
@@ -150,7 +151,7 @@ keywords: C++, effective C++
  
  
  
-六、继承与面向对象设计
+# 六、继承与面向对象设计
  
 #### 条款32：确定你的public继承塑模出is-a关系
  
@@ -181,7 +182,7 @@ keywords: C++, effective C++
 1. 在应用域（applicationdomain），复合意味着has-a（有一个）。在实现域（implement domain），复合意味is-implement-in-terms-of（根据某物实现出）
  
 #### 条款39：明智而谨慎地使用private继承
-1. private继承意味着is-implemented-in-terms-of（根据某物实现出）。它通常比复合的级别低。但是当derived class需要访问protected base class的成员，或需要重新定义继承而来的virtual函数时，这么设计师合理的。
+1. private继承意味着is-implemented-in-terms-of（根据某物实现出）。它通常比复合的级别低。但是当derived class需要访问protected base class的成员，或需要重新定义继承而来的virtual函数时，这么设计是合理的。
 2. 和复合不同，private继承可以造成emptybase最优化。这对致力于“对象尺寸最小化”的程序库开发者而言，可能很重要。
 ![](/images/posts/2015-08-17-effect-c-book/10.png)
  
@@ -192,7 +193,7 @@ keywords: C++, effective C++
  
  
  
-七、模板和泛型编程
+# 七、模板和泛型编程
  
 #### 条款41：了解隐式接口和编译期多态
 1. class和template都支持接口和多态
@@ -243,7 +244,7 @@ keywords: C++, effective C++
  
 
  
-八、定制new和delete
+# 八、定制new和delete
  
 #### 条款49：了解new-handler的行为
 1. set_new_handler允许客户指定一个函数，在内存分配无法满足时被调用。
@@ -266,7 +267,7 @@ keywords: C++, effective C++
 
  
  
-九杂项讨论
+# 九杂项讨论
  
 #### 条款53：不要忽视编译期的告警
  
