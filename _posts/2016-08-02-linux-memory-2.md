@@ -5,10 +5,14 @@ categories: Linux
 description: free命令引发的思考
 keywords: free, swap, 内存优化
 ---
-下文所操作机器已关闭swap。如描述有误，望轻拍，谢谢。本文理论基础
- 
+
+
+下文所操作机器已关闭swap。如描述有误，望轻拍，谢谢。[本文理论基础](https://bingoex.github.io/2016/01/01/linux-memory-1/)
+
+
 # free查看内存使用的基本命令
 ![](/images/posts/2016-08-02-linux-memory-2/1.png)
+
 第一行7625M是系统实际使用的所有内存，但其中包含了buffer/cache。237M是系统当前空闲的物理内存，这是不是意味着我们的系统内存不够呢？答案是不一定。
   
 # 什么是Buffer Cache和Page Cache？
