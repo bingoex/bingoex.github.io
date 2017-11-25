@@ -6,14 +6,13 @@ description: 事务的隔离性
 keywords: 事务的隔离性, 隔离性
 ---
 
-
-
-| 事务级别 | 脏读 | 不可重复读 | 幻读 |
+| 事务级别 | 脏读 | 不可重复读 | 幻读 | 
 | ------- | :------ | :----- | :------ |
 | Read uncommitted | √ | √ | √ |
-| Read committed | × |√ | √ |
+| Read committed | × | √ | √ |
 | Repeatable read | × | × | √ |
 | Serializable | × | × | × |
+
 √: 可能出现    ×: 不会出现
 
 
