@@ -7,6 +7,7 @@ keywords: 事务的隔离性, 隔离性
 ---
 
 
+
 | 事务级别 |脏读 |不可重复读 |幻读 |
 |Read uncommitted |√ |√ |√ |
 |Read committed |× |√ |√ |
