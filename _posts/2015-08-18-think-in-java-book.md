@@ -42,7 +42,7 @@ new 将对象置于“堆”里。 主类型（基础类型）,置于栈中。
 
 equals()实际比较的是对象的内容，而非它们的句柄
 
->>>使用了“零扩展”：无论正负，都在高位插入0
+\>\>\>使用了“零扩展”：无论正负，都在高位插入0
 
 
 
@@ -158,8 +158,8 @@ Parcel11.Contents c = p.new Contents();
 2. 按声明顺序调用成员初始化模块。
 3. 调用衍生构建器的主体
 
-在构建器内唯一能够安全调用的是在基础类中具有final 属性的那些方法（也适用于 private
-方法，它们自动具有final 属性）
+在构建器内唯一能够安全调用的是在基础类中具有final 属性的那些方法（**也适用于 private
+方法，它们自动具有final 属性**）
 
 
 
@@ -255,34 +255,34 @@ java 1.0 io
 import java.io.*;
 
 public class InFile extends DataInputStream \{
-    public InFile(String filename) throws FileNotFoundException \{
+    public InFile(String filename) throws FileNotFoundException {
         super(new BufferedInputStream(new FileInputStream(filename)));
-    \}
+    }
 
-    public InFile(File file) throws FileNotFoundException \{
+    public InFile(File file) throws FileNotFoundException {
         this(file.getPath());
     }
 } 
 
 
-public class PrintFile extends PrintStream \{
-    public PrintFile(String filename) throws IOException \{
+public class PrintFile extends PrintStream {
+    public PrintFile(String filename) throws IOException {
         super(new BufferedOutputStream(new FileOutputStream(filename)));
-    \}
+    }
 
-    public PrintFile(File file) throws IOException \{
+    public PrintFile(File file) throws IOException {
         this(file.getPath());
-    \}
+    }
 }
 
-public class OutFile extends DataOutputStream \{
-    public OutFile(String filename) throws IOException \{
+public class OutFile extends DataOutputStream {
+    public OutFile(String filename) throws IOException {
         super(new BufferedOutputStream(new FileOutputStream(filename)));
-    \}
+    }
 
-    public OutFile(File file) throws IOException \{
+    public OutFile(File file) throws IOException {
         this(file.getPath());
-    \}
+    }
 }
 ```
 
@@ -388,7 +388,7 @@ clone()方法在基础类 Object里为protected（“按位”复制）。
  
 对于访问某个关键共享资源的所有方法，都必须把它们设为 synchronized，否则就不能正常地工作
 ```java
-synchronized(syncObject) \{
+synchronized(syncObject) {
     // This code can be accessed by only
     // one thread at a time, assuming all
     // threads respect syncObject's lock
@@ -414,7 +414,7 @@ synchronized 不能继承—— 也就是说，假如一个方法在基础类中
 - wait()在挂起内部调用的方法时，会解除对象的锁定。
 - wait()和 notify()比较特别的一个地方是这两个方法都属于基础类 Object 的一部分。
  
-能调用 wait()的唯一地方是在一个同步的方法或代码块内部。
+**能调用 wait()的唯一地方是在一个同步的方法或代码块内部**。
 若在一个不同步的方法内调用wait()或者 notify()，尽管程序仍然会编译，但在运行它的时候，就会得到一个IllegalMonitorStateException（非法监视器状态违例）。
  
 wait()允许我们将线程置入“睡眠”状态，同时又“积极”地等待条件发生改变。而且只有在一个 notify()或 notifyAll()发生变化的时候，线程才会被唤醒，并检查条件是否有变。因此，我们认为它提供了在线程间进行同步的一种手段。
