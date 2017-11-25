@@ -1,9 +1,9 @@
 ---
 layout: post
-title: 
-categories: 
-description: 
-keywords: 
+title: 数据库事务的ACID
+categories: 数据库
+description: 数据库事务的ACID
+keywords: ACID, 数据库ACID
 ---
 
 # ACID
