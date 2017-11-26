@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 深入理解JVM读书笔记－java运行时内存简介
+title: 深入理解Java虚拟机读书笔记－java运行时内存简介
 categories: Java 读书笔记
 description: 深入理解JVM读书笔记－java运行时内存简介
 keywords: 
