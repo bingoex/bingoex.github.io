@@ -21,20 +21,20 @@ keywords: 函数调用, stack
 
 4)栈中存储了**函数的参数，函数的局部变量，寄存器的值（用以恢复寄存器），函数的返回地址以及用于结构化异常处理的数据**。这些数据是按照一定的顺序组织在一起的，我们称之为一个**堆栈帧（Stack Frame）**。在函数退出时，整个函数帧将被销毁。
  
-```C
-int foo1(int m, intn){
-        int p=m*n;
-            return p;
+```C++
+int foo1(int m, int n){
+    int p=m*n;
+    return p;
 }
 int foo(int a, intb){
     int c=a+1;
-        int d=b+1;
-            int e=foo1(c,d);
-                return e;
+    int d=b+1;
+    int e=foo1(c,d);
+    return e;
 }
 int main(){
     int result=foo(3,4);
-        return 0;
+    return 0;
 }
 ```
 
@@ -42,6 +42,7 @@ int main(){
 
 
 从main函数执行的第一行代码，即int result=foo(3,4);开始跟踪。这时main以及之前的函数对应的堆栈帧已经存在在栈中了，如下图所示：
+
 ![](/images/posts/2015-09-07-func-call-stack.md/2.png)
 
 
@@ -108,7 +109,7 @@ int main(){
 我们发现，EBP寄存器的地址值总是指向先前的EBP，而先前的EBP又指向先前的先前的EBP，这样就在堆栈中形成了一个链表！这个特性有什么用呢，我们知道EBP+4地址存储了函数的返回地址，通过该地址我们可以知道当前函数的上一级函数（通过在符号文件中查找距该函数返回地址最近的函数地址，该函数即当前函数的上一级函数），以此类推，我们就可以知道当前线程整个的函数调用顺序。
 
 
-返回值是如何传递的
+# 返回值是如何传递的
 
 1）首先，如果返回值等于4字节，函数将把返回值赋予EAX寄存器，通过EAX寄存器返回。例如返回值是字节、字、双字、布尔型、指针等类型，都通过EAX寄存器返回。
 
@@ -118,7 +119,7 @@ int main(){
 
 4）如果返回值是一个大于8字节的数据，将如何传递返回值呢？
 我们修改foo函数的定义如下并将它的代码做适当的修改：
-```C
+```C++
 MyStruct foo(int a, int b)
 {
     ...
@@ -139,7 +140,7 @@ struct MyStruct
 caller会在压入最左边的参数后，再压入一个指针，我们姑且叫它ReturnValuePointer，ReturnValuePointer指向caller局部变量区的一块未命名的地址，这块地址将用来存储callee的返回值。函数返回时，callee把返回值拷贝到ReturnValuePointer指向的地址中，然后把ReturnValuePointer的地址赋予EAX寄存器。函数返回后，caller通过EAX寄存器找到ReturnValuePointer，然后通过ReturnValuePointer找到返回值，最后，caller把返回值拷贝到负责接收的局部变量上（如果接收返回值的话）。
 
 
-堆栈帧的销毁
+# 堆栈帧的销毁
 
 
 当函数将返回值赋予某些寄存器或者拷贝到堆栈的某个地方后，函数开始清理堆栈帧，准备退出。堆栈帧的清理顺序和堆栈建立的顺序刚好相反：
@@ -178,7 +179,7 @@ main函数中 int result=foo(3,4);的反汇编：
 ```
 
 下面是foo函数代码正式执行前和执行后的反汇编代码
-``AMS
+```AMS
 008A13F0  push       ebp                  //把ebp压入堆栈
 008A13F1  mov        ebp,esp              //ebp指向先前的ebp,到达图4的状态
 008A13F3  sub        esp,0E4h             //为局部变量分配0E4字节的空间,到达图5的状态
