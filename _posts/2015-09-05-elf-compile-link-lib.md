@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ELF、编译、链接、装载和库
-categories: C++ C
+categories: C/C++ 
 description: ELF、编译、链接、装载和库
 keywords: ELF, 编译, 链接, 装载, 库
 ---

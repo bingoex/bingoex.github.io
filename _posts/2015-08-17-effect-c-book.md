@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Effective C++读书笔记
-categories: C++ 读书笔记
+categories: C/C++ 读书笔记
 description: Effective C++读书笔记
 keywords: C++, effective C++
 ---
