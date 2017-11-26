@@ -88,7 +88,7 @@ Java虚拟机的指令由一个字节长度的、 代表着某种特定操作含
 final方法由于它无法被覆盖，没有其他版本，所以也无须对方法接收者进行多态选择，又或者说多态选择的结果肯定是唯一的。
 
 ```java
-Human man=new Man（）；
+Human man=new Man()；
 ```
 把上面代码中的“Human”称为变量的静态类型（Static Type），或者叫做的外观类型（Apparent Type），后面的“Man”则称为变量的实际类型（Actual Type）
 
