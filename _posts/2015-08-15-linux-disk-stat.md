@@ -1,8 +1,8 @@
 ---
 layout: post
-title: linux磁盘浅析
+title: Linux磁盘浅析
 categories: Linux
-description: linux磁盘浅析
+description: Linux磁盘浅析
 keywords: df, /proc/diskstats, 文件大小
 ---
 
