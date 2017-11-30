@@ -190,7 +190,7 @@ Serial收集器的老年代版本。一个单线程收集器，使用“标记-�
 
 
 
-# CMS（Concurrent Mark Sweep）收集器
+## CMS（Concurrent Mark Sweep）收集器
 
 一种以获取最短回收停顿时间为目标的收集器。基于“标记—清除”算法。会有大量空间碎片产生。当需要分配大内存时，容易触发触发一次FullGC。
 
