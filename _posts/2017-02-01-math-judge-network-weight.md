@@ -36,6 +36,10 @@ keywords:
 
 ![](/images/posts/2017-02-01-math-judge-network-weight.md/1.png)
 
+![](/images/posts/2017-02-01-math-judge-network-weight.md/2.png)
+
+![](/images/posts/2017-02-01-math-judge-network-weight.md/3.png)
+
 
 
 
