@@ -156,10 +156,13 @@ struct ngx_command_s {
 - 11.3、调用每个**核心模块**（type为NGX_CORE_MODULE）的**init_conf回调方法**。
 
 - 11.4、获取核心模块ngx_core_conf_t，并生成和删除相关pid文件
+
 ```C
 ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx, ngx_core_module);
 #define ngx_get_conf(conf_ctx, module) conf_ctx[module.index]
+```
 
+```C
 typedef struct {
     ngx_flag_t daemon;
     ngx_flag_t master;
