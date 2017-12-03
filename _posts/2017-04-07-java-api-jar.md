@@ -45,7 +45,7 @@ feedBackdto = JSON.parseObject(URLDecoder.decode(Submit,"utf-8"), new TypeRefere
 
 
 
-- map
+map
 
 ```java
 for (Map.Entry<String,Object> entry : streamQueryParamsJO.entrySet()){
