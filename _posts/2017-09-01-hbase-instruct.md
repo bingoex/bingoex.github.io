@@ -28,6 +28,9 @@ HBase – Hadoop Database，是一个高可靠性、高性能、面向列、可�
 # 数据模型
 
 ## Table & Column Family
+
+![](/images/posts/2017-09-01-hbase-instruct.md/1.jpeg)
+
 - Row Key: 行键，Table的主键，Table中的记录按Row Key排序
 - Timestamp: 时间戳，每次数据操作对应的时间戳，可以看作是数据的version number
 - Column Family：列簇，Table在水平方向有一个或者多个Column Family组成，一个Column Family中可以由任意多个Column组成，所有Column均以二进制格式存储，用户需要自行进行类型转换。
