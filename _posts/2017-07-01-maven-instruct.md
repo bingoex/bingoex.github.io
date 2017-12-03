@@ -27,12 +27,12 @@ intellij 自带集成了maven工具，可配置IDE使用自己下载的maven版�
 
 构建项目
 - validate：验证项目是否正确及构建项目所需的信息是否正确；
-- compile：编译项目源代码；
+- **compile**：编译项目源代码；
 - test-compile：编译测试源代码；
 - test：使用合适的单元测试框架运行测试；
-- package：接受编译好的代码，打包成可发布的格式；
-- install：将包安装至本地仓库，以让其它项目依赖；
-- deploy：将最终的包复制到远程的仓库，以让其它开发人员与项目共享。
+- **package**：接受编译好的代码，打包成可发布的格式；
+- **install**：将包安装至本地仓库，以让其它项目依赖；
+- **deploy**：将最终的包复制到远程的仓库，以让其它开发人员与项目共享。
 
 ## site生命周期
 
@@ -49,13 +49,13 @@ intellij 自带集成了maven工具，可配置IDE使用自己下载的maven版�
 存在于两个地方。1又被叫做全局配置，2为用户配置。如果两者都存在，它们的内容将被合并，并且用户范围的settings.xml优先。
 1. 安装目录/conf/settings.xml
 2. ~/.m2/settings.xml
-- localRepository：本地仓库的路径，默认值是${user.home} /.m2/ repository，如果想要把从远程仓库下载的jar包放在其他目录，只需要在这里修改成自己的目录即可；
+- **localRepository**：本地仓库的路径，默认值是${user.home} /.m2/ repository，如果想要把从远程仓库下载的jar包放在其他目录，只需要在这里修改成自己的目录即可；
 - interactiveMode：如果Maven要试图与用户交互来得到输入就设置为true，否则就设置为false，默认为true。
 - usePluginRegistry:如果需要让Maven使用文件${user.home}.m2/plugin-registry.xml来管理插件版本，则设为true。默认为false。
 - offline：如果构建系统要在离线模式下工作，设置为true，默认为false。如果构建服务器因为网络故障或者安全问题不能与远程仓库相连，那么这个设置是非常有用的。
 - pluginGroups:这个元素包含了一系列pluginGroup元素，每个又包含了一个groupId。当一个plugin被使用，而它的groupId没有被提供的时候，这个列表将被搜索。
-- servers:如username和password;
-- mirrors:配置构建系统使用的镜像服务器;
+- **servers**:如username和password;
+- **mirrors**:配置构建系统使用的镜像服务器;
 - proxies：配置代理服务器;
 - profiles:settings.xml中的profile是pom.xml中的profile的简洁形式。它包含了激活(activation)，仓库(repositories)，插件仓库(pluginRepositories)和属性(properties)元素。profile元素仅包含这四个元素是因为他们涉及到整个的构建系统，而不是个别的POM配置。如果settings中的profile被激活，那么它的值将重载POM或者profiles.xml中的任何相等ID的profiles。
  
@@ -65,7 +65,7 @@ pom.xml定义了项目的基本信息，用于描述项目如何构建，声明�
 
 ### 基本属性
 
-- modelVersion:指定了当前POM模型的版本，对于maven2及maven3来说，它只能是4.0.0；groupId,artifactId和version定义了一个项目的基本坐标
+- modelVersion:指定了当前POM模型的版本，对于maven2及maven3来说，它只能是4.0.0；**groupId,artifactId和version定义了一个项目的基本坐标**
 - groupId:项目或者组织的唯一标志（项目组）;
 - artifactId:项目名称;
 - version:项目版本 
@@ -104,17 +104,17 @@ scope:用于限制相应的依赖范围，包括以下几种变量：
 
 optional:标注可选，一般用在，假如你的项目为A,你在依赖类库B时，将optional设为true，则别人在依赖你的项目A时，B不会被传递依赖进去，如果别人也希望依赖这个类库，则也需要添加对类库B的依赖.
 
-路径最短，申明顺序其次
+**路径最短，申明顺序其次**
 
 ##### 如何隔离jar包
 
-##### 第一个很常用的exclusion来隔离jar包。
+###### 第一个很常用的exclusion来隔离jar包。
 
 ![](/images/posts/2017-07-01-maven-instruct.md/4.png)
 
 项目依赖project-a,但是project-a依赖project-b，但是该项目不想依赖project-b，所以利用exclusion来排除对project-b的依赖。
 
-##### 第二个不常用的方法就是创建一个空包。
+###### 第二个不常用的方法就是创建一个空包。
 
 空包的坐标和你需要隔离的Jar包坐标一样。项目中这个空包申明在pom文件靠前的地方，这样依据maven依赖原则，这个空包会优先被使用，后面所有无论是直接依赖还是间接依赖的相同坐标的jar包都不会被使用了。空包比exclusion的好处就是不用在所有间接依赖的地方去exclusion
 
@@ -143,7 +143,7 @@ optional:标注可选，一般用在，假如你的项目为A,你在依赖类库
 
 能让所有在子项目中引用一个依赖而不用显式的列出版本号。Maven会沿着父子层次向上走，直到找到一个拥有dependencyManagement元素的项目，然后它就会使用在这个dependencyManagement 元素中指定的版本号。
 
-在子pom里只需要添加对mysql-connector-java的依赖，而无需声明版本。这样做的好处就是：如果有多个子项目都引用同一样依赖，则可以避免在每个使用的子项目里都声明一个版本号，这样当想升级或切换到另一个版本时，只需要在顶层父容器里更新，而不需要一个一个子项目的修改。另外如果某个子项目需要另外的一个版本，只需要声明自己的version就可。dependencyManagement里只是声明依赖，并不实现引入，因此子项目需要显式的声明需要用的依赖.
+在子pom里只需要添加对mysql-connector-java的依赖，而无需声明版本。这样做的好处就是：如果有多个子项目都引用同一样依赖，**则可以避免在每个使用的子项目里都声明一个版本号**，这样当想升级或切换到另一个版本时，只需要在顶层父容器里更新，而不需要一个一个子项目的修改。另外如果某个子项目需要另外的一个版本，只需要声明自己的version就可。dependencyManagement里只是声明依赖，并不实现引入，因此子项目需要显式的声明需要用的依赖.
  
 ### build
 
