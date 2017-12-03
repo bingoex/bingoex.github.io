@@ -15,7 +15,7 @@ keywords:
 
 # 容器
 
-![](/images/posts/2017-07-03-servlet-instruct.md/1.png)
+![](/images/posts/2017-07-03-servlet-instruct.md/1.jpeg)
 
 - Container 是容器的父接口，所有子容器都必须实现这个接口。
 - **Wrapper 代表一个 Servlet。它负责管理一个 Servlet，包括 Servlet 的装载、初始化、执行以及资源回收**。
