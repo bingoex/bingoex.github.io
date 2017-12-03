@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 判断网络质量好坏的加权公式
-categories: 数学 计算机网络
+categories: 数学 计算机网络 算法
 description: 判断网络质量好坏的加权公式
 keywords: 
 ---
