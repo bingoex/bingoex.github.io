@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Java泛型理解
-categories: 
+categories: Java
 description: 
 keywords: 
 ---
