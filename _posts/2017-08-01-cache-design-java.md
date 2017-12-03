@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 缓存系统简介
-categories: 
+categories: Java 系统架构
 description: 
 keywords: 
 ---
