@@ -8,7 +8,7 @@ keywords:
 
 
 - lombok（@data）
-https://my.oschina.net/darkness/blog/510808
+<https://my.oschina.net/darkness/blog/510808>
 
 
 - org.apache.commons.lang3.StringUtils
