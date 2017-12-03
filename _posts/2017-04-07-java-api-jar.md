@@ -29,9 +29,9 @@ return checkResults.stream().filter(CheckResult::isSuccess).findFirst().orElse(n
 
 
 - FastJSON
+```java
 configTO.setHeaderPageInfo(JSON.parseObject(configDO.getHeaderPageInfoStr(), HeaderPageInfo.class));
 
-```java
 JSONArray jsonArray = JSON.parseArray(configDO.getBizResDataStr());
 JSONObject jsonObject = jsonArray.getJSONObject(index);
 BusinessResourceDO bizResDO = JSON.parseObject(JSON.toJSONString(jsonObject), BusinessResourceDO.class);
@@ -45,6 +45,7 @@ feedBackdto = JSON.parseObject(URLDecoder.decode(Submit,"utf-8"), new TypeRefere
 
 
 - map
+
 ```java
 for (Map.Entry<String,Object> entry : streamQueryParamsJO.entrySet()){
     streamQueryParamsMap.put(entry.getKey(),String.valueOf(entry.getValue()));
@@ -55,6 +56,7 @@ configQueryParamsMap.putAll(urlQueryParamsMap);
 
 
 - org.apache.commons.lang3.EnumUtils
+
 ```java
 String time = "H1";
 TimeUnit timeUnit = EnumUtils.getEnum(TimeUnit.class, time);
