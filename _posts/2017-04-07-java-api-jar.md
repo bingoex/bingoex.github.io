@@ -55,7 +55,7 @@ configQueryParamsMap.putAll(urlQueryParamsMap);
 ```
 
 
-- org.apache.commons.lang3.EnumUtils
+org.apache.commons.lang3.EnumUtils
 
 ```java
 String time = "H1";
@@ -63,13 +63,13 @@ TimeUnit timeUnit = EnumUtils.getEnum(TimeUnit.class, time);
 ```
 
 
-- org.apache.commons.collections.MapUtils
+org.apache.commons.collections.MapUtils
 
 
-- org.apache.commons.lang3.BooleanUtils
+org.apache.commons.lang3.BooleanUtils
 
 
-- com.alibaba.fastjson
+com.alibaba.fastjson
 
 
 
