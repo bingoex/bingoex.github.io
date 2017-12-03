@@ -91,7 +91,7 @@ Maven提供了三个隐式的变量，可以用来访问环境变量，POM信息
 
 ![](/images/posts/2017-07-01-maven-instruct.md/3.png)
 
-<dependency>下，可以添加自己项目对其他包的依赖，maven会自动将我们所依赖的包添加到项目中。
+\<dependency\>下，可以添加自己项目对其他包的依赖，maven会自动将我们所依赖的包添加到项目中。
 
 type:相应依赖产品包形式，如：jar,war;
 
