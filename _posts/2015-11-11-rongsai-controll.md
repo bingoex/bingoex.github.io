@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 
-categories: 
+title:  传统拥塞控制
+categories: 计算机网络
 description: 
 keywords: 
 ---
