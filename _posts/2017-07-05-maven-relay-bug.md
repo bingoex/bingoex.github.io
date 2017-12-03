@@ -1,6 +1,6 @@
 ---
 layout: post
-title: maven平板化依赖的弊端
+title: Maven平板化依赖的弊端
 categories: Java 工具
 description: 
 keywords: 

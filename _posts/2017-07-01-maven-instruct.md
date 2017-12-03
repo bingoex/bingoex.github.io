@@ -1,6 +1,6 @@
 ---
 layout: post
-title: maven简介
+title: Maven简介
 categories: Java 工具
 description: 
 keywords: 

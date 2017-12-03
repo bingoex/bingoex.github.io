@@ -1,6 +1,6 @@
 ---
 layout: post
-title: nginx源码浅析－编译前准备configure简介
+title: Nginx源码浅析－编译前准备configure简介
 categories: Nginx
 description: nginx源码浅析－编译前准备configure简介
 keywords: 
