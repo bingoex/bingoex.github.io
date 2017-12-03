@@ -6,7 +6,7 @@ description:
 keywords: 
 ---
 
-![](/images/posts//.png)
+# 基础
 
 对于Integer i=?在**-128至127**之间的赋值，Integer对象是在IntegerCache.cache产生，会复用已有对象，这个区间内的Integer值可以直接使用==进行判断，但是这个区间之外的所有数据，都会在堆上产生，并不会复用已有对象，这是一个大坑。
 
@@ -35,9 +35,9 @@ Serializable接口不能继承
 4. POJO是DO/DTO/BO/VO的统称，禁止命名成xxxPOJO
 
 
-1. 所有的POJO类属性必须使用包装数据类型。
-2. RPC方法的返回值和参数必须使用包装数据类型。
-3. 所有的局部变量推荐使用基本数据类型。
+- 所有的POJO类属性必须使用包装数据类型。
+- RPC方法的返回值和参数必须使用包装数据类型。
+- 所有的局部变量推荐使用基本数据类型。
 
 定义DO/DTO/VO等POJO类时，不要设定任何属性默认值
 
@@ -79,6 +79,7 @@ POJO类必须写toString方法（可考虑ReflectionToStringBuilder）
 2. 底层调用频度比较高的方法。毕竟是像纯净水过滤的最后一道，参数错误不太可能到底层才会暴露问题。一般DAO层与Service层都在同一个应用中，部署在同一台服务器中，所以DAO的参数校验，可以省略。
 3. 被声明成private只会被自己代码所调用的方法。如果能够确定调用方法的代码传入参数已经做过检查或者肯定不会有问题，此时可以不校验参数。
 
+# 异常
 
 捕获异常是为了处理它，不要捕获了却什么都不处理而抛弃之，如果不想处理它，请将该异常抛给它的调用者。最外层的业务使用者，必须处理异常，将其转化为用户可以理解的内容。
 
@@ -92,7 +93,8 @@ POJO类必须写toString方法（可考虑ReflectionToStringBuilder）
 
 
 
-更多内容可参考
-<http://blog.csdn.net/b2222505/article/details/70198027>
+
+# 其他
+更多内容可参考 <https://bingoex.github.io/2015/08/18/think-in-java-book/>
 
 
