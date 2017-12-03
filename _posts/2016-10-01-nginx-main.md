@@ -1,8 +1,8 @@
 ---
 layout: post
-title: nginx源码浅析－主流程
-categories: nginx C/C++
-description: nginx源码浅析－主流程
+title: Nginx源码浅析－主流程
+categories: Nginx C/C++
+description: Nginx源码浅析－主流程
 keywords: 
 ---
 
