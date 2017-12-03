@@ -17,20 +17,22 @@ keywords:
 # 前期初始化
 
 
-## 1、ngx_strerror_init初始化所有系统错误字符串。
+- 1、ngx_strerror_init初始化所有系统错误字符串。
 
-## 2、ngx_get_options获取**命令行参数**（-s等）。
+- 2、ngx_get_options获取**命令行参数**（-s等）。
 
-## 3、ngx_time_init（线程安全，精确到毫秒级别）
+- 3、ngx_time_init（线程安全，精确到毫秒级别）
+
 调用ngx_time_update。上锁，获取当前时间并提前设置好相关字符串变量，从而方便后面使用。
 
-## 4、ngx_regex_init
+- 4、ngx_regex_init
 
-## 5、ngx_log_init初始化错误日志log
+- 5、ngx_log_init初始化错误日志log
 
-## 6、ngx_ssl_init
+- 6、ngx_ssl_init
 
-## 7、初始化ngx_cycle结构（ngx_cycle_t）
+- 7、初始化ngx_cycle结构（ngx_cycle_t）
+
 创建并设置内存池、保存程序运行参数和环境变量、设置前缀和配置文件等路径字符串。
 ```C
 struct ngx_cycle_s {
@@ -83,24 +85,27 @@ struct ngx_cycle_s {
 
 ![](/images/posts/2016-10-01-nginx-main.md/2.jpeg)
 
-## 8、ngx_os_init
+- 8、ngx_os_init
+
 获取系统名和版本号、设置网络io回调（ngx_linux_io）、获取cpu核数（ngx_ncpu）、最大socket数（ngx_max_sockets）、CpuCacheLine大小（ngx_cacheline_size）、内存页大小（ngx_pagesize）、设置随机数种子。
 
-## 9、ngx_add_inherited_sockets
+- 9、ngx_add_inherited_sockets
+
 如果环境变量有NGINX_VAR值，则从环境变量中取出socket的fd信息并设置到ngx_cycle的ngx_listening_t变量listening中，设置ngx_inherited值为1。
 
-## 10、ngx_preinit_modules简单初始化ngx_module_t数组ngx_modules
+- 10、ngx_preinit_modules简单初始化ngx_module_t数组ngx_modules
 
-## 11、ngx_init_cycle配置初始化
+# 11、ngx_init_cycle配置初始化
 
 
 ![](/images/posts/2016-10-01-nginx-main.md/3.png)
 
 从步骤7中的ngx_cycle变量中拷贝值到新的ngx_cycle_t变量，包括设置内存池、log、前缀字符串、配置文件字符串、路径数组、dump相关、打开文件句柄list（ngx_open_file_t）、共享内存list（ngx_shm_zone_t）、监听数组（ngx_listening_t）、重用连接queue、配置文件上下文、hostname主机名、模块数组ngx_module_t。
 
-### 11.0、**初始化每个核心模块（type为NGX_CORE_MODULE），调用其create_conf回调方法，将返回值（生成模块配置文件上下文）保存到cycle->conf_ctx相应模块下标中**。
+- 11.0、**初始化每个核心模块（type为NGX_CORE_MODULE），调用其create_conf回调方法，将返回值（生成模块配置文件上下文）保存到cycle->conf_ctx相应模块下标中**。
 
 初始化ngx_conf_t变量conf（type为NGX_MAIN_CONF）
+
 ```C
 struct ngx_conf_s {
     char *name;
@@ -121,10 +126,12 @@ struct ngx_conf_s {
 };
 ```
 
-### 11.1、ngx_conf_param（解析ngx_cycle_s的conf_param参数值，通过-g指定）
+- 11.1、ngx_conf_param（解析ngx_cycle_s的conf_param参数值，通过-g指定）
+
 **调用ngx_conf_parse，解析（状态机，各种if、case）并设置到conf中参数args**，对于每个配置参数都进行如下步骤。
 
 回调第三方自定义指令解析机制conf的handler方法，如果有，一般没有。
+
 ```C
 rv = (*cf->handler)(cf, NULL, cf->handler_conf);
 ```
@@ -144,11 +151,11 @@ struct ngx_command_s {
 };
 ```
 
-### 11.2、ngx_conf_parse（解析ngx_cycle_s的**conf_file文件**，同8.1）
+- 11.2、ngx_conf_parse（解析ngx_cycle_s的**conf_file文件**，同8.1）
 
-### 11.3、调用每个**核心模块**（type为NGX_CORE_MODULE）的**init_conf回调方法**。
+- 11.3、调用每个**核心模块**（type为NGX_CORE_MODULE）的**init_conf回调方法**。
 
-### 11.4、获取核心模块ngx_core_conf_t，并生成和删除相关pid文件
+- 11.4、获取核心模块ngx_core_conf_t，并生成和删除相关pid文件
 ```C
 ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx, ngx_core_module);
 #define ngx_get_conf(conf_ctx, module) conf_ctx[module.index]
@@ -187,26 +194,28 @@ typedef struct {
 } ngx_core_conf_t;
 ```
 
-### 11.5、删除相关锁文件、生成相关path文件夹并设置权限和用户、打开新文件open_files并关闭无用open_files、打开shared_memory及初始化slab、关闭无用shared_memory、处理listening数组并设置socket参数（SO_REUSEPORT、SO_REUSEADDR、IPV6_V6ONLY、noblock、unix域chmod、SO_RCVBUF、SO_SNDBUF、SO_KEEPALIVE、TCP_KEEPIDLE、TCP_KEEPINTVL、TCP_KEEPCNT、SO_SETFIB、TCP_FASTOPEN、SO_ACCEPTFILTER、TCP_DEFER_ACCEPT、IP_RECVDSTADDR、IP_PKTINFO、IPV6_RECVPKTINFO）、开启监听（bind、listen）并关闭无用listening
+- 11.5、删除相关锁文件、生成相关path文件夹并设置权限和用户、打开新文件open_files并关闭无用open_files、打开shared_memory及初始化slab、关闭无用shared_memory、处理listening数组并设置socket参数（SO_REUSEPORT、SO_REUSEADDR、IPV6_V6ONLY、noblock、unix域chmod、SO_RCVBUF、SO_SNDBUF、SO_KEEPALIVE、TCP_KEEPIDLE、TCP_KEEPINTVL、TCP_KEEPCNT、SO_SETFIB、TCP_FASTOPEN、SO_ACCEPTFILTER、TCP_DEFER_ACCEPT、IP_RECVDSTADDR、IP_PKTINFO、IPV6_RECVPKTINFO）、开启监听（bind、listen）并关闭无用listening
 
 调用ngx_init_modules，**回调各个模块的init_module方法**。
+```C
 cycle->modules[i]->init_module(cycle)
+```
 
 # 信号处理
 
 
-## 12、**如果是-s启动（ngx_signal），则发送完信号后退出程序**
+- 12、**如果是-s启动（ngx_signal），则发送完信号后退出程序**
 
 读取pid文件，取出pid。发送相应信号给pid进程。
 
 具体信号处理函数ngx_signal_handler会设置标志位变量，然后在各进程while循环中处理。
 
-## 13、注册信号处理函数、daemon初始化、生成pid文件
+- 13、注册信号处理函数、daemon初始化、生成pid文件
 
 # 子进程启动
 
 
-## 14、如果**NGX_PROCESS_SINGLE**（单进程）模式启动则调用ngx_single_process_cycle
+- 14、如果**NGX_PROCESS_SINGLE**（单进程）模式启动则调用ngx_single_process_cycle
 设置环境变量ngx_set_environment、调用每个模块的init_process方法。
 
 进入无限循环。
@@ -228,12 +237,12 @@ cycle->modules[i]->init_module(cycle)
 
 
 
-## 15、如果其他模式启动则调用ngx_master_process_cycle。
+- 15、如果其他模式启动则调用ngx_master_process_cycle。
 
 sigprocmask屏蔽相关信号
 
 
-### 15.0、调用ngx_start_worker_processes启动子进程
+- 15.0、调用ngx_start_worker_processes启动子进程
 
 以**NGX_PROCESS_RESPAWN**模式创建子进程。每个子进程调用socketpair创建双向通信管道并设置异步io相关属性。**调用fork，其中子进程调用ngx_worker_process_cycle函数后无限循环**。master每生成一个子进程就调用ngx_pass_open_channel把其信息（pid，数组下标、NGX_CMD_OPEN_CHANNEL等ngx_channel_t）通过管道告诉其他已经生成的子进程，子进程收到后会写入自己的ngx_processes数组。
 
@@ -249,7 +258,7 @@ sigprocmask屏蔽相关信号
 - 处理ngx_reopen，重新打开open_files。
 
 
-### 15.1、调用ngx_start_cache_manager_processes
+- 15.1、调用ngx_start_cache_manager_processes
 
 如果有ngx_cycle的path设置了manager和loader参数，则**fork两个子进程（NGX_PROCESS_RESPAWN模式），子进程调用ngx_cache_manager_process_cycle**，并通知其他子进行自己的信息（同woker）
 
@@ -259,7 +268,7 @@ sigprocmask屏蔽相关信号
 
 
 
-### 15.2、master处理while循环
+- 15.2、master处理while循环
 
 处理SIGALRM（**ngx_sigalrm**）信号，定时触发（超时时间delay初始50，＊2递增），辅助ngx_terminate信号。
 
