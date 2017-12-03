@@ -7,20 +7,20 @@ keywords:
 ---
 
 
-- lombok（@data）
-<https://my.oschina.net/darkness/blog/510808>
+lombok（@data） <https://my.oschina.net/darkness/blog/510808>
 
 
-- org.apache.commons.lang3.StringUtils
+org.apache.commons.lang3.StringUtils
 
 
-- ReflectionToStringBuilder//不用写toString了
+ReflectionToStringBuilder//不用写toString了
 
 
-- org.apache.commons.beanutils//操作javabean
+org.apache.commons.beanutils//操作javabean
 
 
-- stream API
+stream API
+
 ```java
 private List<CheckResult> checkResults = new ArrayList<>();
 // ....
@@ -28,7 +28,8 @@ return checkResults.stream().filter(CheckResult::isSuccess).findFirst().orElse(n
 ```
 
 
-- FastJSON
+FastJSON
+
 ```java
 configTO.setHeaderPageInfo(JSON.parseObject(configDO.getHeaderPageInfoStr(), HeaderPageInfo.class));
 
