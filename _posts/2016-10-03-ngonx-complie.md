@@ -24,9 +24,9 @@ bundle
         openssl（git-root-path）
             my.configurae
 
-            my.configure文件
 ```
 
+# my.configure文件
 ```shell
 #!/bin/bash
             ./auto/configure \
