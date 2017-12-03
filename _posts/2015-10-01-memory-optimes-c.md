@@ -12,7 +12,9 @@ keywords:
 使用mlock锁定内存，避免被交换出去。
  
 尽量减少swap或把swap关掉。
+
 <http://blog.csdn.net/b2222505/article/details/60324150>
+
 <http://blog.csdn.net/b2222505/article/details/54144353>
 
 
