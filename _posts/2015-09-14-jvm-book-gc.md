@@ -2,7 +2,7 @@
 layout: post
 title: 深入理解Java虚拟机读书笔记－ java垃圾回收机制原理
 categories: Java 读书笔记
-description: 深入理解Java虚拟机读书笔记－ java垃圾回收机制原理
+description: 深入理解Java虚拟机读书笔记－java垃圾回收机制原理
 keywords: 
 ---
 
