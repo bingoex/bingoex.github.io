@@ -18,7 +18,7 @@ keywords:
 
 
 集合类 | Key Value |  Super |  说明
-Hashtable |  不允许为null |   不允许为null  |  Dictionary | 线程安全
+Hashtable |  不允许为null |   不允许为null  |  Dictionary  线程安全
 ConcurrentHashMap |  不允许为null  |  不允许为null |  AbstractMap 分段锁技术
 TreeMap | 不允许为null  |  允许为null |  AbstractMap 线程不安全
 HashMap | 允许为null | 允许为null | AbstractMap 线程不安全
@@ -28,11 +28,12 @@ HashMap | 允许为null | 允许为null | AbstractMap 线程不安全
 Serializable接口不能继承
 
 
-命名规范
+# 命名规范
 1. 数据对象：xxxDO，xxx即为数据表名。
 2. 数据传输对象：xxxDTO，xxx为业务领域相关的名称。
 3. 展示对象：xxxVO，xxx一般为网页名称。
 4. POJO是DO/DTO/BO/VO的统称，禁止命名成xxxPOJO
+
 
 1. 所有的POJO类属性必须使用包装数据类型。
 2. RPC方法的返回值和参数必须使用包装数据类型。
@@ -48,7 +49,7 @@ POJO类必须写toString方法（可考虑ReflectionToStringBuilder）
 - VO（View Object）：显示层对象，通常是Web向模板渲染引擎层传输的对象。
 
 
-类访问相关
+# 类访问相关
 1. 如果不允许外部直接通过new来创建对象，那么构造方法必须是private。
 2. 工具类不允许有public或default构造方法。
 3. 类非static成员变量并且与子类共享，必须是protected。 
@@ -58,13 +59,13 @@ POJO类必须写toString方法（可考虑ReflectionToStringBuilder）
 7. 类成员方法只供类内部调用，必须是private。 
 8. 类成员方法只对继承类公开，那么限制为protected。
 
-equals和hashCode
+# equals和hashCode
 1.  只要重写equals，就必须重写hashCode。
 2.  因为Set存储的是不重复的对象，依据hashCode和equals进行判断，所以Set存储的对象必须重写这两个方法。
 3.  如果自定义对象做为Map的键，那么必须重写hashCode和equals。
 
 
-参数校验
+# 参数校验
 
 下列情形中，需要进行参数校验
 1. 调用频次低的方法。
