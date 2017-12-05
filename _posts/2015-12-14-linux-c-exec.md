@@ -6,7 +6,6 @@ description:
 keywords: 
 ---
 
-![](/images/posts//.png)
 
 fork函数是用于创建一个子进程，该子进程几乎是父进程的副本，而有时我们希望子进程去执行另外的程序，exec函数族就提供了一个在进程中启动另一个程序执行的方法。它可以根据指定的文件名或目录名找到可执行文件，并用它来取代原调用进程的数据段、代码段和堆栈段，在执行完之后，原调用进程的内容除了进程号外，其他全部被新程序的内容替换了。另外，这里的可执行文件既可以是二进制文件，也可以是Linux下任何可执行脚本文件
 
@@ -36,6 +35,9 @@ int execvp(const char *file, char *const argv[])
 
 
 事实上，这6个函数中真正的系统调用只有execve，其他5个都是库函数，它们最终都会调用execve这个系统调用
+
+![](/images/posts/2015-12-14-linux-c-exec.md/1.png)
+
 ```c
 char *const ps_argv[] ={"ps", "-o", "pid,ppid,pgrp,session,tpgid,comm", NULL};
 char *const ps_envp[] ={"PATH=/bin:/usr/bin", "TERM=console", NULL};
