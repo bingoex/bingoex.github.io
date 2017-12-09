@@ -12,7 +12,7 @@ keywords:
 
 可用性（**Availability**）：集群中部分节点故障后，集群整体是否还能处理客户端请求。
 
-分区容忍性（Partition tolerance）：是否允许数据的分区，意思是指是否允许集群中的节点之间无法通信。
+分区容忍性（**Partition tolerance**）：是否允许数据的分区，意思是指是否允许集群中的节点之间无法通信。
 
 [CAP](https://bingoex.github.io/2015/08/30/database-acid/)定理指出，一个系统不可能同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition-Tolerance。
  
@@ -32,7 +32,7 @@ Zookeeper集群是由一组Server节点组成，Server节点中存在一个角�
 
 # 文件系统
 
-ZooKeeper提供的命名空间类似于标准文件系统，名称是以斜杠(/)分隔的路径元素序列。
+ZooKeeper提供的**命名空间类似于标准文件系统**，名称是以斜杠(/)分隔的路径元素序列。
 
 命名空间中的每个节点都有唯一的路径标识。
 
