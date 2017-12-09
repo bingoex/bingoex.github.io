@@ -33,37 +33,37 @@ keywords:
 Timer是jdk中提供的一个定时器工具，使用的时候会在主线程之外起一个单独的线程执行指定的计划任务，含一个TimeTask队列。TimerTask是一个实现了Runnable接口的抽象类，代表一个可以被Timer执行的任务。
 
 #### 优点：
-1) 提供简单调度功能。
+- 1) 提供简单调度功能。
 
 #### 缺点：
-1）Timer实现为单线程，性能不足，需自己维护一个Timer池子。
-2）需自己维护任务上下文
-3）需要自己持久化任务。
-3）需要自己实现分布式、异常容灾、负载均衡等问题。
-4）需要自己实现任务监控。
+- 1）Timer实现为单线程，性能不足，需自己维护一个Timer池子。
+- 2）需自己维护任务上下文
+- 3）需要自己持久化任务。
+- 3）需要自己实现分布式、异常容灾、负载均衡等问题。
+- 4）需要自己实现任务监控。
 
 ## 2、ScheduledThreadPoolExecutor
 Timer和TimeTask的多线程版本，性能更优。
 
 #### 优点：
-1）提供高性能定时调度功能。
+- 1）提供高性能定时调度功能。
 
 #### 缺点：
-1）需自己维护任务上下文。
-2）需要自己持久化任务。
-2）需要自己实现分布式、异常容灾、负载均衡等问题。
-3）需要自己实现任务监控。
+- 1）需自己维护任务上下文。
+- 2）需要自己持久化任务。
+- 2）需要自己实现分布式、异常容灾、负载均衡等问题。
+- 3）需要自己实现任务监控。
 
 ## 3、Quartz
 底层使用ScheduledThreadPoolExecutor实现，提供了更友好的且带上下文的API。
 
 #### 优点：
-1）提供高性能定时调度功能。
-2）提供任务上下文
+- 1）提供高性能定时调度功能。
+- 2）提供任务上下文
 #### 缺点：
-1）需要自己持久化任务。
-2）需要自己实现分布式、异常容灾、负载均衡等问题。
-3）需要自己实现任务监控（框架封装过深，不便加监控）。
+- 1）需要自己持久化任务。
+- 2）需要自己实现分布式、异常容灾、负载均衡等问题。
+- 3）需要自己实现任务监控（框架封装过深，不便加监控）。
 
 ## 4、Spring定时器（Spring-task）
 可以将它看成一个轻量级的Quartz，而且使用起来比Quartz简单许多。基于配置文件的，不支持API方式，不便于动态生产调度任务，直接放弃。
@@ -72,29 +72,29 @@ Timer和TimeTask的多线程版本，性能更优。
 利用metaq自带的延迟发送功能可实现定时调度功能，消息体作为任务上下文，让机器做到任务无关性。metaq提供了分布式、容灾等功能、支持亿级别的堆积能力。基于上面的考虑，第一版的中间件以metaq为基础，提供了定时调度的功能。
 
 #### 优点：
-1）提供高性能定时调度功能。
-2）提供任务上下文。
-3）实现超简单。
-4）metaq服务自带分布式、容灾、负责均衡属性。
+- 1）提供高性能定时调度功能。
+- 2）提供任务上下文。
+- 3）实现超简单。
+- 4）metaq服务自带分布式、容灾、负责均衡属性。
 
 #### 缺点：
-1）需要自己持久化任务。
-2）需要自己实现任务监控（监控不方便）。
-3）容易造成消息风暴。
-4）当metaq消息丢失时，定时调度任务终止（一般metaq会保证消息不丢失）。
+- 1）需要自己持久化任务。
+- 2）需要自己实现任务监控（监控不方便）。
+- 3 ）容易造成消息风暴。
+- 4）当metaq消息丢失时，定时调度任务终止（一般metaq会保证消息不丢失）。
 
 ## 6、公司组件DTS
 公司中间件团队开发的一款分布式任务调度产品，调度底层实现利用Quartz，且提供友好的API、分布式、容灾、负载均衡等重要的功能。
 
 #### 优点：
-1）提供高性能定时调度功能。
-2）提供任务上下文。
-3）DTS服务自带分布式、容灾、负责均衡属性。
+- 1）提供高性能定时调度功能。
+- 2）提供任务上下文。
+- 3）DTS服务自带分布式、容灾、负责均衡属性。
 
 #### 缺点：
-1）需要实现任务的持久化。
-2）需要实现任务监控。
-3）不便于动态生成需求定制的定时任务（什么时间点开始、结束、调度间隔、调度次数等）
+- 1）需要实现任务的持久化。
+- 2）需要实现任务监控。
+- 3）不便于动态生成需求定制的定时任务（什么时间点开始、结束、调度间隔、调度次数等）
 
 ## 结论：
 为了避免重复造轮子和摒着站在巨人的角度，最终采用的方案是任务持久化落地到iDB并分库分表。DTS定时发布常驻任务，做到负载均衡，且每个分片任务只负责一个分表，避免竞争，提高性能。通过数据库操作提供任务实时监控功能。
@@ -120,20 +120,20 @@ Timer和TimeTask的多线程版本，性能更优。
 # 五、遇到的问题及解决方案
 
 **问题一**、系统遇到了负载均衡问题，哪个系统进程负载哪个数据库的任务？扩容和当机后怎么解决负载问题？
-1）通过DTS的常驻任务，可以解决分片均匀的问题。当系统扩容或缩容等容灾情况下能做到自动调节。
+- 1）通过DTS的常驻任务，可以解决分片均匀的问题。当系统扩容或缩容等容灾情况下能做到自动调节。
 
 <br/>
 **问题二**、为了实现任务的持久化，我们需要把任务信息落地存储到数据库中，但频繁查询和修改数据库会出现性能问题，怎么解决？
-1）我们把数据库分库分表（16个库、512个表）。并且每个分片任务只查询和加锁自己负责的分表中，避免了全局锁表。
-2）给关键字段添加索引，提供查询效率。
-3）定时删除过期长久的任务，减少数据库堆积量。
+- 1）我们把数据库分库分表（16个库、512个表）。并且每个分片任务只查询和加锁自己负责的分表中，避免了全局锁表。
+- 2）给关键字段添加索引，提供查询效率。
+- 3）定时删除过期长久的任务，减少数据库堆积量。
 
 **问题三**、怎么做到修改任务状态后必然发出metaq消息通知客户端。
-1）数据库修改直接用（update+where），而不是先select后update。
-2）通过精卫可以确保数据库任务修改后，回调发送消息的业务逻辑，确保了事务性。
+- 1）数据库修改直接用（update+where），而不是先select后update。
+- 2）通过精卫可以确保数据库任务修改后，回调发送消息的业务逻辑，确保了事务性。
 
 **问题四**、用户怎么接受调度任务通知
-1）底层通过metaq，并封装友好的SDK提供给用户，用户只需实现简单的接口就可以。
+- 1）底层通过metaq，并封装友好的SDK提供给用户，用户只需实现简单的接口就可以。
 <br/>
 <br/>
 <br/>
@@ -168,7 +168,7 @@ Long taskId = taskScheduleService.addTask(taskOptionTO);
 PgLog.debug("taskScheduleService.addTask", taskId);
 ```
 
-##回调方法
+## 回调方法
 ```java
 package com.xxx.perceptor.task.demo;
 
@@ -212,19 +212,19 @@ public class DemoScheduleTaskListener implements ScheduleTaskListener {
 ##xml配置
 ```xml
 <bean id="demoScheduleTaskProcess" class="com.xxx.perceptor.task.processor.ScheduleTaskProcess" init-method="init" >
-<property name="listenerMap">
-<map>
-<entry key="0" value-ref="demoScheduleTaskListener" />
-</map>
-</property>
+    <property name="listenerMap">
+        <map>
+            <entry key="0" value-ref="demoScheduleTaskListener" />
+        </map>
+    </property>
 </bean>
 
 <bean id="demoScheduleTaskListener" class="com.xxx.perceptor.task.demo.DemoScheduleTaskListener"/>
 
 <bean id="taskScheduleService" class="com.xxx.hsf.app.spring.util.HSFSpringConsumerBean">
-<property name="interfaceName" value="com.taobao.perceptor.task.service.TaskScheduleService"/>
-<property name="version" value="${task.hsf.version}"/>
-<property name="group" value="HSF"/>
+    <property name="interfaceName" value="com.taobao.perceptor.task.service.TaskScheduleService"/>
+    <property name="version" value="${task.hsf.version}"/>
+    <property name="group" value="HSF"/>
 </bean>
 ```
 <br/>
@@ -232,19 +232,19 @@ public class DemoScheduleTaskListener implements ScheduleTaskListener {
 <br/>
 
 # 四、未来展望
-0、目前perceptor系统已经接入，并对外提供了带规则引擎的定时调度任务接口。未来还会有社区等其他业务会利用该中间件发布简单的定时调度任务。欢迎大家接入使用。
+目前perceptor系统已经接入，并对外提供了带规则引擎的定时调度任务接口。未来还会有社区等其他业务会利用该中间件发布简单的定时调度任务。欢迎大家接入使用。
 
-1、系统目前只提供了简单定时调度功能和查询功能，未来需要做到监控更精细化，提供Web等方式查看任务状态等信息。
+系统目前只提供了简单定时调度功能和查询功能，未来需要做到监控更精细化，提供Web等方式查看任务状态等信息。
 
-2、业务odps任务导入仍未支持，这个能力也需要补上。
+业务odps任务导入仍未支持，这个能力也需要补上。
 <br/>
 <br/>
 <br/>
 
 # 参考资料
-http://www.cnblogs.com/lingiu/p/3782813.html
-http://blog.csdn.net/xieyuooo/article/details/8607220
-http://www.quartz-scheduler.org/
+<http://www.cnblogs.com/lingiu/p/3782813.html>
+<http://blog.csdn.net/xieyuooo/article/details/8607220>
+<http://www.quartz-scheduler.org/>
 
 
 
