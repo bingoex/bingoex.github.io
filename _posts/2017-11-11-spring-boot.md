@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 浅析Spring Boot
+title: Spring Boot浅析
 categories: Java 系统架构
 description: 
 keywords: 
