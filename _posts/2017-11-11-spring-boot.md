@@ -6,6 +6,7 @@ description:
 keywords: 
 ---
 
+本文涉及spring boot出现的背景及好处，最好会简单涉及源码和原理相关内容。
 
 # 纯spring的问题
 1. 需要做大量的配置：声明大量的bean，并把他们组装到一起
