@@ -58,7 +58,7 @@ markdown: kramdown
 kramdown:
     input: GFM
 highlighter: rouge
-paginate: 15
+paginate: 20
 lsi: false
 quiet: false
 excerpt_separator: "\n\n"
