@@ -8,16 +8,18 @@ keywords:
 
 # CAP
 
-一致性（Consistency）：同一个数据在集群中的所有节点，任意同一时刻是否具有同样的值。
+一致性（**Consistency**）：同一个数据在集群中的所有节点，任意同一时刻是否具有同样的值。
 
-可用性（Availability）：集群中部分节点故障后，集群整体是否还能处理客户端请求。
+可用性（**Availability**）：集群中部分节点故障后，集群整体是否还能处理客户端请求。
 
 分区容忍性（Partition tolerance）：是否允许数据的分区，意思是指是否允许集群中的节点之间无法通信。
-CAP定理指出，一个系统不可能同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition-Tolerance）。
+
+(CAP)[https://bingoex.github.io/2015/08/30/database-acid/]定理指出，一个系统不可能同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition-Tolerance）。
  
 如果在分布式系统里，P就有可能发生，也即P是我们要容忍的，CA才是我们要去权衡的。当然在没有发生P的情况下，是能够实现完美的C和A的。
 
-Zookeeper提供的一致性是弱一致性。主要用来做分布式协调，是个CP系统。
+Zookeeper提供的一致性是弱一致性。主要用来做分布式协调，是个AP系统。
+
 首先数据的复制有如下规则：zookeeper确保对znode树的每一个修改都会被复制到集合体中超过半数的机器上。那么就有可能有节点的数据不是最新的而被客户端访问到。并且会有一个时间点,在集群中是不一致的。但是实时的一致性可以由客户端通过调用调用sync()方法来自己保证。
 
 
@@ -39,7 +41,7 @@ ZooKeeper提供的命名空间类似于标准文件系统，名称是以斜杠(/
 
 # ZAB协议（Zookeeper Atomic Broadcast）
 
-对paxos的改进
+对[paxos](https://bingoex.github.io/2017/11/01/paxos/)的改进
 
 ## 恢复模式：
 
@@ -105,7 +107,7 @@ Leader服务器会为每一个Follower服务器都各自分配一个单独的队
 
 # 参考资料
 
-https://zookeeper.apache.org/
+<https://zookeeper.apache.org/>
  
 
 
