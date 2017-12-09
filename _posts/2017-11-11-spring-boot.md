@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 浅析Spring Boot
-categories: Java
+categories: Java 系统架构
 description: 
 keywords: 
 ---
