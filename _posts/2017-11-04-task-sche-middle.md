@@ -58,6 +58,7 @@ Timer和TimeTask的多线程版本，性能更优。
 #### 优点：
 - 提供高性能定时调度功能。
 - 提供任务上下文
+
 #### 缺点：
 - 需要自己持久化任务。
 - 需要自己实现分布式、异常容灾、负载均衡等问题。
@@ -178,31 +179,31 @@ import com.xxx.perceptor.task.processor.TaskProcessResult;
 public class DemoScheduleTaskListener implements ScheduleTaskListener {
 
     @Override
-        public TaskProcessResult scheduleTaskProcess(TaskContextTO taskContextTO) {
-            try {
-                // 业务逻辑
-                PgLog.task("DemoScheduleTaskListener", JSON.toJSONString(taskContextTO));
-                // 用户可以设置next_execute_time, 默认按intervalTime间隔调度
-                // 一天后执行
-                // taskContextTO.getTaskUpdateTO().setNextExecuteTime(System.currentTimeMillis() / 1000 + 24 * 60 * 60));
+    public TaskProcessResult scheduleTaskProcess(TaskContextTO taskContextTO) {
+        try {
+            // 业务逻辑
+            PgLog.task("DemoScheduleTaskListener", JSON.toJSONString(taskContextTO));
+            // 用户可以设置next_execute_time, 默认按intervalTime间隔调度
+            // 一天后执行
+            // taskContextTO.getTaskUpdateTO().setNextExecuteTime(System.currentTimeMillis() / 1000 + 24 * 60 * 60));
 
-                // 用户可以设置是否终止调度
-                // taskContextTO.getTaskUpdateTO().setStop(true);
+            // 用户可以设置是否终止调度
+            // taskContextTO.getTaskUpdateTO().setStop(true);
 
-                // 用户修改上下文
-                // taskContextTO.getTaskUpdateTO().getParams().put("newKey", "newVal");
-            } catch (Exception e) {
-                // PgLog.exp(e, "processScheduleTask error");
-                return TaskProcessResult.FAIL;
-            }
-
-            return TaskProcessResult.SUCCESS;
+            // 用户修改上下文
+            // taskContextTO.getTaskUpdateTO().getParams().put("newKey", "newVal");
+        } catch (Exception e) {
+            // PgLog.exp(e, "processScheduleTask error");
+            return TaskProcessResult.FAIL;
         }
+
+        return TaskProcessResult.SUCCESS;
+    }
 }
 
 ```
 
-##xml配置
+## xml配置
 ```xml
 <bean id="demoScheduleTaskProcess" class="com.xxx.perceptor.task.processor.ScheduleTaskProcess" init-method="init" >
     <property name="listenerMap">
