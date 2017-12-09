@@ -40,28 +40,20 @@ jstat [option] pid
 ```
 - -gc：
 输出每个堆区域的当前可用空间以及已用空间（伊甸园，幸存者等等），GC执行的总次数，GC操作累计所花费的时间。
-
 - -gcutil：
 输出每个堆区域使用占比，以及GC执行的总次数和GC操作所花费的事件。
-
 - -gccause：
 输出-gcutil提供的信息以及最后一次执行GC的发生原因和当前所执行的GC的发生原因
-
 - -gccapactiy：
 输出每个堆区域的最小空间限制（ms）/最大空间限制（mx），当前大小，每个区域之上执行GC的次数。（不输出当前已用空间以及GC执行时间）。
-
 - -gcnew：
 输出新生代空间的GC性能数据
-
 - -gcnewcapacity：
 输出新生代空间的大小的统计数据。
-
 - -gcold：
 输出老年代空间的GC性能数据。
-
 - -gcoldcapacity：
 输出老年代空间的大小的统计数据。
-
 - -gcpermcapacity：
 输出持久带空间的大小的统计数据。
 
@@ -218,7 +210,7 @@ java -agentlib:hprof=cpu=samples,interval=20,depth=3 程序名
 //每隔20毫秒采样CPU消耗信息，堆栈深度为3，在当前目录生成的profile文件（名称为java.hprof.txt）
 ```
 
-#btrace
+# btrace
 
 通过在运行中的java类中注入trace代码， 并对运行中的目标程序进行热交换(hotswap)来达到对代码的跟踪。使用btrace可以在不改进代码，不影响当前线上运行的基础上进行运行时环境的跟踪，可以免去打日志，发部等繁琐的工作，是一个非常不错的java诊断工具
 
@@ -228,7 +220,7 @@ public class ThreadPoolTrace {
 
     private static volatile long count;
 
-    @OnMethod(
+        @OnMethod(
             clazz="java.util.concurrent.ThreadPoolExecutor",
             method="<init>"
             )
@@ -257,10 +249,14 @@ public class ThreadPoolTrace {
 
 ```shell
 //例子
-[GC（Allocation Failure） 2017-09-25T01:29:00.538+0800: 353407.711[ParNew: 1754248K- >7388K(1922432K), 0.0284345 secs]； 3008857K->1262047K(4019584K), 0.0290499 secs] [Times: user=0.05 sys=0.00, real=0.03 secs] 。
+[GC（Allocation Failure） 2017-09-25T01:29:00.538+0800: 
+353407.711[ParNew: 1754248K- >7388K(1922432K), 0.0284345 secs]； 
+3008857K->1262047K(4019584K), 0.0290499 secs] [Times: user=0.05 sys=0.00, real=0.03 secs] 。
 
 //详解
-[GC（Allocation Failure） 2017-09-25T01:29:00.538+0800: （时间戳）353407.711（代表虚拟机启动以来的gc总秒数）[ParNew（GC的区域）: 1754248K（垃圾回收前的大小）- >7388K（垃圾回收以后的大小）(1922432K)（该区域总大小）, 0.0284345 secs（回收时间，秒）]； 3008857K（堆区垃圾回收前的大小）->1262047K（堆区垃圾回收后的大小）(4019584K)（堆区总大小）, 0.0290499 secs（回收时间）] [Times: user=0.05（GC用户耗时） sys=0.00（GC系统耗时）, real=0.03 secs（GC实际耗时）] 。
+[GC（Allocation Failure） 2017-09-25T01:29:00.538+0800: （时间戳）
+353407.711（代表虚拟机启动以来的gc总秒数）[ParNew（GC的区域）: 1754248K（垃圾回收前的大小）- >7388K（垃圾回收以后的大小）(1922432K)（该区域总大小）, 0.0284345 secs（回收时间，秒）]； 
+3008857K（堆区垃圾回收前的大小）->1262047K（堆区垃圾回收后的大小）(4019584K)（堆区总大小）, 0.0290499 secs（回收时间）] [Times: user=0.05（GC用户耗时） sys=0.00（GC系统耗时）, real=0.03 secs（GC实际耗时）] 。
 ```
 
 GC 和 Full GC 是垃圾回收的停顿类型，而不是区分是新生代还是年老代，如果有 Full 说明发生了 Stop-The-World。（如调用 System.gc()
@@ -272,7 +268,7 @@ GC 和 Full GC 是垃圾回收的停顿类型，而不是区分是新生代还�
 JMX（Java Management Extensions，即Java管理扩展）是一个为应用程序、设备、系统等植入管理功能的框架。JMX可以跨越一系列异构操作系统平台、系统体系结构和网络传输协议，灵活的开发无缝集成的系统、网络和服务管理应用。在java中就是java.lang.management这个包。
 
 
-# 建立JMX连接
+## 建立JMX连接
 
 我们要用JMX监控性能指标，首先就需要和应用程序建立JMX连接，但并不是每一个应用程序都可以建立JMX连接的。应用在启动的时候，必须开启JMX端口，我们才能和应用建立连接开启JMX端口的方法很简单，就是在启动应用程序的时候，加上以下执行参数：
 
@@ -295,7 +291,7 @@ JMXConnector connector = JMXConnectorFactory.connect(serviceURL, map);
 MBeanServerConnection mbsc = connector.getMBeanServerConnection();
 ```
 
-# 获取MXBean
+## 获取MXBean
 JMX里面有很多个官方的MXBean，用于监控jvm和运行环境的各种指标。
 
 ClassLoadingMXBean  |    用于Java虚拟机的类加载系统的管理接口。
@@ -385,7 +381,7 @@ for (ObjectName on : garbageCollectorMXBeanNames){
     Long gcCount = gcBean.getCollectionCount();
 
     //GC时间
-    Long gcTime = gcBean. getCollectionTime();
+    Long gcTime = gcBean.getCollectionTime();
 }
 ```
 
