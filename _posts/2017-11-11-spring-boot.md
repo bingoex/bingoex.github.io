@@ -16,7 +16,7 @@ keywords:
 # Spring Boot简介
 Spring Boot在Spring4.0基础上长出来，Boot是引导的意思，意为帮助开发者快速搭建Spring应用
 
-# Spring Boot的好处
+## Spring Boot的好处
 - 让 编码 变得更简单：更多Annotation让编码更简洁，纯Java Config告别眼花缭乱的XML。
 - 让 测试 变得更简单：支持大多数流行测试框架，本地就能起应用，做集成测试都相当快。
 - 让 配置 变得更简单：最大化的自动配置，开箱即用，零配置情况下就可以启动应用（功能依赖，而不是jar包依赖）。
@@ -169,7 +169,7 @@ org.springframework.boot.autoconfigure.websocket.WebSocketAutoConfiguration
 }
 ```
 
-[更多spring注解请看](http://blog.csdn.net/b2222505/article/details/78613353)
+[更多spring注解请看](https://bingoex.github.io/2017/11/10/spring/)
 
 
 
