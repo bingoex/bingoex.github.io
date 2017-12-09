@@ -36,8 +36,8 @@ public final class Class<T> implements java.io.Serializable,
        GenericDeclaration,
        Type,
        AnnotatedElement {
-           ......
-       }
+       ......
+}
 ```
 
 
@@ -62,33 +62,33 @@ Java提供了3种内置标准注解（@Override,@Deprecate,@SuppressWarnings）�
 # demo
 ```java
 //声明注解（业务提供方）
-    @Retention(RetentionPolicy.RUNTIME)//声明注解的保留期限。运行期仍保留该注解，可通过反射获得
-    @Target(ElementType.METHOD) //声明可以使用该注解的目标类型
-    public @interface NeedTest { //定义注解
-        boolean value() default true; //声明注解成员
-    }
+@Retention(RetentionPolicy.RUNTIME)//声明注解的保留期限。运行期仍保留该注解，可通过反射获得
+@Target(ElementType.METHOD) //声明可以使用该注解的目标类型
+public @interface NeedTest { //定义注解
+    boolean value() default true; //声明注解成员
+}
 
-    //使用注解（业务使用方）
-    @NeedTest(value = true)
-    public void deleteForum(int forumId) {
-        System.out.println("删除：" + forumId);
-    }
+//使用注解（业务使用方）
+@NeedTest(value = true)
+public void deleteForum(int forumId) {
+    System.out.println("删除：" + forumId);
+}
 
-    //访问注解（业务提供方 “注解处理器”）
-    public void ToolTest() {
-    Class clazz = ForumService.class;
-    Method[] methods = clazz.getDeclaredMethods();
-    System.out.println(methods.length);
-    for (Method method : methods) {
-        NeedTest nt = method.getAnnotation(NeedTest.class);
-        if (nt != null) {
-            if (nt.value()) {
-                System.out.println(method.getName() + "()需要测试");
-            } else {
-                System.out.println(method.getName() + "()不需要测试");
-            }
+//访问注解（业务提供方 “注解处理器”）
+public void ToolTest() {
+Class clazz = ForumService.class;
+Method[] methods = clazz.getDeclaredMethods();
+System.out.println(methods.length);
+for (Method method : methods) {
+    NeedTest nt = method.getAnnotation(NeedTest.class);
+    if (nt != null) {
+        if (nt.value()) {
+            System.out.println(method.getName() + "()需要测试");
+        } else {
+            System.out.println(method.getName() + "()不需要测试");
         }
     }
+}
 }
 ```
 
