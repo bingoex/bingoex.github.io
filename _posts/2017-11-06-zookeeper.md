@@ -14,7 +14,7 @@ keywords:
 
 分区容忍性（Partition tolerance）：是否允许数据的分区，意思是指是否允许集群中的节点之间无法通信。
 
-(CAP)[https://bingoex.github.io/2015/08/30/database-acid/]定理指出，一个系统不可能同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition-Tolerance）。
+[CAP](https://bingoex.github.io/2015/08/30/database-acid/)定理指出，一个系统不可能同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition-Tolerance。
  
 如果在分布式系统里，P就有可能发生，也即P是我们要容忍的，CA才是我们要去权衡的。当然在没有发生P的情况下，是能够实现完美的C和A的。
 
