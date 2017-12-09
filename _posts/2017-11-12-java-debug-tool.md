@@ -6,19 +6,16 @@ description:
 keywords: 
 ---
 
-
-
-
-
-
-
+当遇到java相关的问题时，可通过下面的工具快速定位问题。
 
 # jps
 输出JVM中运行的进程状态信息
+```
 -q 不输出类名、Jar名和传入main方法的参数
 -m 输出传入main方法的参数
 -l 输出main类或Jar的全限名
 -v 输出传入JVM的参数
+```
 ```shell
 jps -m -l
 1217 com.xxxx.sunfire.agent.Main
