@@ -42,10 +42,10 @@ mixed（混合方式），不会在从库产生歧义的语句只记录sql语句
 # Binlog相关命令及参数
 ```sql
 show variables like 'log_%'
-show binlog events; #binlog记录
-show variables like 'binlog_format'; #binlog格式
+show binlog events; //binlog记录
+show variables like 'binlog_format'; //binlog格式
 set binlog_format = xxx
-reset master; #清空binlog
+reset master; //清空binlog
 ```
 
 ```xml
