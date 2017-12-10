@@ -19,17 +19,17 @@ Statement,ROW,MiXED
 
 ## Statement
 
-statement（基于语句的复制）：每一条会修改数据的sql都会记录在binlog中。
+statement（基于语句的复制）：每一条会修改数据的**sql**都会记录在binlog中。
 
 优点：不需要记录每一行的变化，减少了binlog日志量，节约了IO，提高性能。
 
-缺点：由于记录的只是执行语句，为了这些语句能在slave上正确运行，因此还必须记录每条语句在执行的时候的一些相关信息，以保证所有语句能在slave得到和在master端执行时候相同的结果。另外mysql的复制,像一些特定函数功能，slave可与master上要保持一致会有很多相关问题(如sleep()，rand()，last_insert_id()，user-definedfunctions(udf)，LOAD_FILE()、UUID()、USER()、FOUND_ROWS()、SYSDATE()等函数会出现问题).
+缺点：由于记录的只是执行语句，为了这些语句能在slave上正确运行，因此还**必须记录每条语句在执行的时候的一些相关信息**，以保证所有语句能在slave得到和在master端执行时候相同的结果。另外mysql的复制,像一些特定函数功能，slave可与master上要保持一致会有很多相关问题(如sleep()，rand()，last_insert_id()，user-definedfunctions(udf)，LOAD_FILE()、UUID()、USER()、FOUND_ROWS()、SYSDATE()等函数会出现问题).
 
 ## Row
 
 row（基于行的复制）:不记录sql语句上下文相关信息，仅保存哪条记录被修改。
 
-优点：非常清楚的记录下每一行数据修改的细节。而且不会出现某些特定情况下的存储过程，或function，以及trigger的调用和触发无法被正确复制的问题。
+优点：**非常清楚的记录下每一行数据修改的细节**。而且不会出现某些特定情况下的存储过程，或function，以及trigger的调用和触发无法被正确复制的问题。
 
 缺点:所有的执行的语句当记录到日志中的时候，都将以每行记录的修改来记录，这样可能会产生大量的日志内容,比如一条update语句，修改多条记录，则binlog中每一条修改都会有记录，这样造成binlog日志量会很大，特别是当执行alter table之类的语句的时候，由于表结构修改，每条记录都发生改变，那么该表每一条记录都会记录到日志中。
 
@@ -42,10 +42,10 @@ mixed（混合方式），不会在从库产生歧义的语句只记录sql语句
 # Binlog相关命令及参数
 ```sql
 show variables like 'log_%'
-show binlog events;//binlog记录
-show variables like 'binlog_format';//binlog格式
+show binlog events; #binlog记录
+show variables like 'binlog_format'; #binlog格式
 set binlog_format = xxx
-reset master;//清空binlog
+reset master; #清空binlog
 ```
 
 ```xml
