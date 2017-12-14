@@ -150,4 +150,5 @@ StoreHouseID（仓库ID） |  ManagerID（管理员ID）
 - 并不是应用的范式越高越好，要看实际情况而定。
 - 第三范式已经很大程度上减少了数据冗余，并且减少了造成插入异常，更新异常，和删除异常了。所以大多数情况应用到第三范式已经足够。
 
+[更多数据库设计优化请看](https://bingoex.github.io/2017/10/03/mysql-optimit-suggest/)
 
