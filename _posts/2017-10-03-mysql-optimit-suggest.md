@@ -7,7 +7,8 @@ keywords:
 ---
 
 字段长度选择够用就好，越小越好。能用数值类型尽量使用数值类型，如果不需要用到变长类型的话，那么就统一采用char型。
- 
+
+
 TINYINT一般用于存储性别、是与否、用户状态之类等少数可选项（不建议使用enum枚举类型，扩展只能更改表的字段类型或ONLINE DDL、动作很大）
  
 INT UNSIGNED可用于存储UNIX时间戳、IPV4地址（内置INET_ATON/INET_NTOA快速转换）
