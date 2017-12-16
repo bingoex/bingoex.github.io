@@ -108,13 +108,13 @@ optional:标注可选，一般用在，假如你的项目为A,你在依赖类库
 
 ##### 如何隔离jar包
 
-###### 第一个很常用的exclusion来隔离jar包。
+> 第一个很常用的exclusion来隔离jar包。
 
 ![](/images/posts/2017-07-01-maven-instruct.md/4.png)
 
 项目依赖project-a,但是project-a依赖project-b，但是该项目不想依赖project-b，所以利用exclusion来排除对project-b的依赖。
 
-###### 第二个不常用的方法就是创建一个空包。
+> 第二个不常用的方法就是创建一个空包。
 
 空包的坐标和你需要隔离的Jar包坐标一样。项目中这个空包申明在pom文件靠前的地方，这样依据maven依赖原则，这个空包会优先被使用，后面所有无论是直接依赖还是间接依赖的相同坐标的jar包都不会被使用了。空包比exclusion的好处就是不用在所有间接依赖的地方去exclusion
 
@@ -181,8 +181,6 @@ mvn archetype:generate | 创建 Maven项目
 mvn compile | 编译源代码
 mvn test-compile | 编译测试代码
 mvn test | 运行应用程序中的单元测试
-mvn eclipse:eclipse | 生成 Eclipse项目文件
-mvn eclipse:clean | 清除 Eclipse项目文件
 mvn package | 打包，依据项目生成 jar文件
 mvn install | 打包，并在本地 Repository中安装 jar
 mvn deploy | 打包，并上传到maven远程仓库
@@ -195,8 +193,7 @@ mvn -U install | 重新安装
 
 # 其他
 - 仓库：<http://mvnrepository.com/artifact/org.apache.directory.studio/org.apache.commons.collections/3.2.1>
-- maven打包war：<https://www.cnblogs.com/zhujiabin/p/5115749.html>
-- <https://www.zhihu.com/question/31551133>
+- maven打包war：<https://www.cnblogs.com/zhujiabin/p/5115749.html> <https://www.zhihu.com/question/31551133>
 
 
 
