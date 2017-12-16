@@ -48,9 +48,8 @@ MyISAM引擎行结构模式比较紧凑，磁盘占用较少，高速insert或lo
  
 innoDB高并发读写，支持事务、外键。
  
-索引区别
+[索引区别](https://bingoex.github.io/2017/10/01/mysql-suoyin/)
 
-<http://blog.csdn.net/b2222505/article/details/78234666>
 
 
 

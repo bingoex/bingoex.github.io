@@ -51,21 +51,21 @@ cell中的数据是没有类型的，全部是字节码形式存贮。
 "com.tx.lottery" : { // row key
     "issues" : { // first column family
         "ssq": {  // column key
-1 : "2014150" // single timestamp
+            1 : "2014150" // single timestamp
         },      
-            "dlt": "15015", // no timestamp
-            "k3" : {
-10 : "20150301013", // multiple timestamp
-     7  : "20150301010",
-     1  : "20150301006"
-            }           
+        "dlt": "15015", // no timestamp
+        "k3" : {
+            10 : "20150301013", // multiple timestamp
+             7  : "20150301010",
+             1  : "20150301006"
+        }           
     }
     "apps" : { // second column family
         "" : "hsf"  // empty column key
     }
     "fangInfo" : { // third column faimily
         "location":,
-            "price":
+        "price":
     } 
 }
 ```
@@ -79,7 +79,7 @@ cell中的数据是没有类型的，全部是字节码形式存贮。
 
 
 
-# -ROOT- && .META. Table（0.96以前的版本）
+## -ROOT- && .META. Table（0.96以前的版本）
 
 HBase中有两张特殊的Table，-ROOT-和.META.
 
@@ -163,9 +163,9 @@ HFile里面的每个KeyValue对就是一个简单的byte数组。但是这个byt
 
 # HBase表特点
 
-- a.大：一个表可以有上亿行，上百万列
-- b.面向列:面向列(族)的存储和权限控制，列(族)独立检索。
-- c.稀疏:对于为空(null)的列，并不占用存储空间，因此，表可以设计的非常稀疏。
+- 大：一个表可以有上亿行，上百万列
+- 面向列:面向列(族)的存储和权限控制，列(族)独立检索。
+- 稀疏:对于为空(null)的列，并不占用存储空间，因此，表可以设计的非常稀疏。
 
 
 
