@@ -31,6 +31,7 @@ return checkResults.stream().filter(CheckResult::isSuccess).findFirst().orElse(n
 FastJSON
 
 ```java
+//com.alibaba.fastjson
 configTO.setHeaderPageInfo(JSON.parseObject(configDO.getHeaderPageInfoStr(), HeaderPageInfo.class));
 
 JSONArray jsonArray = JSON.parseArray(configDO.getBizResDataStr());
@@ -70,7 +71,6 @@ org.apache.commons.collections.MapUtils
 org.apache.commons.lang3.BooleanUtils
 
 
-com.alibaba.fastjson
 
 
 
