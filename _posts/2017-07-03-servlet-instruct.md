@@ -19,7 +19,7 @@ keywords:
 
 - Container 是容器的父接口，所有子容器都必须实现这个接口。
 - **Wrapper 代表一个 Servlet。它负责管理一个 Servlet，包括 Servlet 的装载、初始化、执行以及资源回收**。
-- 如果要运行 war 程序，就必须要 Host，因为 war 中必有 的web.xml 文件，这个文件的解析需要 Host 。
+- 如果要运行 war 程序，就必须要 Host，因为 war 中必有 的**web.xml 文件，这个文件的解析需要 Host **。
 - 一个 Host 在 Engine 中代表一个虚拟主机，这个虚拟主机的作用就是运行多个应用，它负责安装和展开这些应用，并且标识这个应用以便能够区分它们。
 - 如果有多个 Host 就要定义一个 top 容器 Engine 了。而 Engine 没有父容器了，一个 Engine 代表一个完整的 Servlet 引擎。
 
@@ -51,7 +51,7 @@ servlet容器会为每一个应用创建一个ServletContext并保存在内存�
 - 调用service() (doGet() 或者 doPost())
 - destroy()
 
-可以重写service()方法。如果继承HttpServlet类，可以重写doGet()或者doPost()来处理客户端通过Get或者Post方法过来的表单。实际上，service()方法会调用doGet()方法或者doPost()方法
+可以重写service()方法。如果继承HttpServlet类，可以重写doGet()或者doPost()来处理客户端通过Get或者Post方法过来的表单。实际上，HttpServlet类的service()方法会调用doGet()方法或者doPost()方法
 
 
 # Servlet与HTTP服务的关系
