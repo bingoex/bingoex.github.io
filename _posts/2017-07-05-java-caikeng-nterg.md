@@ -21,9 +21,9 @@ public class FeedBackDTO extends BaseDO {
     private List<String> tags;
     private Integer      feedBackType   //有问题的代码，老接口没有
 
-        public Integer getFeedBackType() {
-            return feedBackType;
-        }
+    public Integer getFeedBackType() {
+        return feedBackType;
+    }
 
 
     //使用处
