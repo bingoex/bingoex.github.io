@@ -85,7 +85,7 @@ keywords:
 
 分布式缓存将缓存系统设计成一个真正支持水平扩展的分布式系统，不像本地缓存会受到内存空间的限制，真正做到了水平伸缩；
 
-典型的的分布式缓存系统有：Redis、Memcached等等
+典型的的分布式缓存系统有：[Redis、Memcached](https://bingoex.github.io/2017/10/06/radis-memcache/)等等
  
  
 
