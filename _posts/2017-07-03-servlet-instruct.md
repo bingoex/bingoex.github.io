@@ -62,7 +62,7 @@ request对象包含所有的http请求信息，如http请求头和请求体等�
 
 **当第一次调用request对象的getSession方法时，servlet容器就会创建它并生成一个唯一session id保存在内存中，同时容器还会设置http响应的cookie信息，键为JSESSIONID，值就为刚刚创建的session id值。只要在cookie的有效期内，客户端在接下来的每次请求都带上这个cookie信息，而Servlet容器则会检查每个请求的头信息，获取名为JSESSIONID的cookie，并通过它的值来获得请求的session对象。**
 
-HttpSession的存活期可以在web.xml中配置，默认是30分钟，所以当客户端在30分钟之内没有再次发送请求时，servlet容器就会自动销毁session对象，对于接下来的请求，就算指定了cookie值也不会访问到同一个session对象，servlet容器会创建一个新的[sessio](https://bingoex.github.io/2017/04/03/session-save-way/)。
+HttpSession的存活期可以在web.xml中配置，默认是30分钟，所以当客户端在30分钟之内没有再次发送请求时，servlet容器就会自动销毁session对象，对于接下来的请求，就算指定了cookie值也不会访问到同一个session对象，servlet容器会创建一个新的[session](https://bingoex.github.io/2017/04/03/session-save-way/)。
 
 客户端的session cookie默认生命周期和浏览器的生命周期一致，关掉浏览器窗口后session cookie就无效了。
 
