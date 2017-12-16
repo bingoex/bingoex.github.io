@@ -8,7 +8,6 @@ keywords:
 
 利用 maven 引入中间件可能[导致包冲突的问题](https://bingoex.github.io/2017/07/01/maven-instruct/#%E5%A6%82%E4%BD%95%E9%9A%94%E7%A6%BBjar%E5%8C%85)，这是 maven 平板化依赖的一个痛点
 
-例子：
 ```xml
 <dependency>
     <groupId>com.xxx.hsf</groupId>

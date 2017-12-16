@@ -22,7 +22,5 @@ command + o 查找类。如果找到多个想同的类名，则排除其中的�
 
 ![](/images/posts/2017-07-06-java-caikeng-maven.md/2.png)
 
-或
-
 ![](/images/posts/2017-07-06-java-caikeng-maven.md/3.png)
 
