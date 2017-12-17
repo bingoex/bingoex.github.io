@@ -20,8 +20,8 @@ public class ArrayList {
 ```
 
 当没有泛型时，我们会使用obejct替代。但这样会存在以下问题
-- 第一有关get方法：每次调用get方法都会返回一个Object对象，每次都要强制类型转换为我们需要的类型。
-- 第二有关add方法：假如我们往聚合了String对象的ArrayList中加入一个File对象，编译器不会产生任何错误提示。
+- 第一有关get方法：每次调用get方法都会返回一个Object对象，每次都**要强制类型转换**为我们需要的类型。
+- 第二有关add方法：假如我们往聚合了String对象的ArrayList中加入一个File对象，**编译器不会产生任何错误提示**。
 
 为了解决上面的问题，范型应运而生。
 
@@ -35,7 +35,7 @@ Pair<String, Integer> pair = new Pair<String, Integer>();
 
 你可能想象List<Integer>代表一个E被全部替换成Integer的版本。它可能导致误解，因为泛型声明绝不会实际的被这样替换。没有代码的多个拷贝。这是和C++模板的很大的区别。
 
-如果Foo是Bar的一个子类型，而G是泛型声明，那么G<Foo>是G<Bar>的子类型并不成立
+**如果Foo是Bar的一个子类型，而G是泛型声明，那么G<Foo>是G<Bar>的子类型并不成立**
 
 
 # 泛型方法
@@ -48,24 +48,24 @@ static <T> void fromArrayToCollection(T[] a, Collection<T> c){
 }
 ```
 
-编译器根据实参为我们推断类型参数的值。它通常推断出能使调用类型最明确的类型参数
+编译器根据实参为我们**推断类型参数的值**。它通常推断出能使调用类型最明确的类型参数
 
 ```java
 class Collections {
-
-    public static <T>  void copy(List<T> dest, List<? extends T> src){...}
-
+    public static <T>  void copy(List<T> dest, List<? extends T> src){
+        //...
+    }
 }
 
 class Collections {
-
-    public static <T, S extends T>  void copy(List<T> dest, List<S> src){...}
-
+    public static <T, S extends T>  void copy(List<T> dest, List<S> src){
+        //...
+    }
 }
 ```
 
 ```java
-<T> T writeAll(Collection<T> coll, Sink<? super T> snk) { … }
+<T> T writeAll(Collection<T> coll, Sink<? super T> snk) {}
 String str = writeAll(cs, s); // YES!!!
 ```
 推断出来的T是String。
@@ -108,7 +108,7 @@ public void addRectangle(List<? extends Shape> shapes) {
 # 新老代码兼容（java5为分界线）
 
 
-当一个泛型类型，比如Collection被使用而没有类型参数时，它被称作一个raw type(自然类型??)。类型Collection表示一个未知类型元素的集合，就像Collection<?>。
+当一个泛型类型，比如Collection被使用而没有类型参数时，它被称作一个raw type(**自然类型**??)。类型Collection表示一个未知类型元素的集合，就像Collection<?>。
 
 自然类型和通配符类型很像，但是他们的类型检查不是同样严格。允许泛型与已经存在的老代码相交互是一个深思熟虑的决定。
 
