@@ -17,11 +17,11 @@ keywords:
 只要重写equals，就必须重写hashCode。
 
 
-集合类 | Key Value |  Super |  说明
-Hashtable |  不允许为null |   不允许为null  |  Dictionary  线程安全
-ConcurrentHashMap |  不允许为null  |  不允许为null |  AbstractMap 分段锁技术
-TreeMap | 不允许为null  |  允许为null |  AbstractMap 线程不安全
-HashMap | 允许为null | 允许为null | AbstractMap 线程不安全
+集合类 | Key | Value |  Super |  说明
+Hashtable |  不允许为null |   不允许为null  |  Dictionary   | 线程安全
+ConcurrentHashMap |  不允许为null  |  不允许为null |  AbstractMap | 分段锁技术
+TreeMap | 不允许为null  |  允许为null |  AbstractMap | 线程不安全
+HashMap | 允许为null | 允许为null | AbstractMap | 线程不安全
 
 
 
