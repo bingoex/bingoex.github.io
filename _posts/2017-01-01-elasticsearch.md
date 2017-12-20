@@ -27,7 +27,7 @@ ElasticSearch是一个开源的、可扩展、分布式的搜索和分析系统�
 
 索引（Index) ，等同于关系数据库中的database，集群可以有多个索引。常见思路是按时间纬度（如月）去定义ES索引。
 
-主分片（Primary shard），一个索引数据可划分成多个shard（分片），相互shard之间无交集。分布到不同的集群节点上。分片对应的是 Lucene 中的索引。注意：ES中一个索引的分片个数是建立索引时就要指定的，建立后不可再改变。所以开始建一个索引时，就要预计数据规模，将分片的个数分配在一个合理的范围。最好是和节点数相关的。理论上对同一个索引，单机上的shards个数最好不要超过两个，这样每个查询尽可能并行。
+主分片（Primary shard），一个索引数据可划分成多个shard（分片），相互shard之间无交集。分布到不同的集群节点上。分片对应的是 Lucene 中的索引。**注意：ES中一个索引的分片个数是建立索引时就要指定的，建立后不可再改变。所以开始建一个索引时，就要预计数据规模，将分片的个数分配在一个合理的范围**。最好是和节点数相关的。理论上对同一个索引，单机上的shards个数最好不要超过两个，这样每个查询尽可能并行。
 
 副本分片（Replica shard），每个主分片可以有一个或者多个副本。ES会尽量将同一索引的不同分片分布到不同的节点上，提高容错性。
 
@@ -85,7 +85,7 @@ ES系统架构里面还包括监控、告警、缓存、线程持这些周边模
 客户端实际上是不知道Master在哪个节点上的，它对于shard的路由情况当然也是一无所知。为了解决这个问题，Elasticsearch引入了coordinator(协调者)的概念。客户端如果需要写入一个document，可以把请求发往任意的一个Elasticsearch节点，那么收到请求的这个节点，就是当前的coordinator(步骤1)。通过扫描这条document, coordinator发现该数据应该写入标号为0的shard上，而shard 0对应的primary在NODE3上面，所以它会把请求原封不动的转发给NODE3(步骤2)。Node3先把数据写入P0中，但PO还有两个replica小伙伴分别在NODE1和NODE2上，所以NODE3与会把复制请求发送到NODE1和NODE2，并等待它们的回应(步骤3)。NODE1和NODE2把数据写入R0后，会回复NODE3，然后NODE3回复coordinatorNODE1，最后客户端得到了写入成功的信息。(当然跟据写入请求consisteny level设置的不同，NODE3在写入P0成功后，有可能不等待NODE1和NODE2的回应，就直接告诉P1数据已经写入成功了)
 
 
-![](/images/posts/2017-01-01-elasticsearch.md/5.jpeg)
+![](/images/posts/2017-01-01-elasticsearch.md/5.png)
 
 
 # 通过id读取
