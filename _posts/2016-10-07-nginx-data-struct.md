@@ -53,6 +53,7 @@ struct ngx_log_s {
 };
 ```
 src/core/ngx_log.h
+
 <http://www.jb51.net/article/88557.htm>
 
 
