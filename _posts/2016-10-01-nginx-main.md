@@ -31,7 +31,7 @@ keywords:
 
 - 6、ngx_ssl_init
 
-- 7、初始化ngx_cycle结构（ngx_cycle_t）
+- 7、初始化ngx_cycle结构（[ngx_cycle_t](https://bingoex.github.io/2016/10/07/nginx-data-struct/)）
 
 创建并设置内存池、保存程序运行参数和环境变量、设置前缀和配置文件等路径字符串。
 ```C
@@ -239,6 +239,9 @@ cycle->modules[i]->init_module(cycle)
 处理ngx_reopen信号，重新打开open_files，并设置用户权限等参数？？
 
 
+<br/>
+<br/>
+<br/>
 
 - 15、如果其他模式启动则调用ngx_master_process_cycle。
 
@@ -286,12 +289,12 @@ sigprocmask屏蔽相关信号
 处理SIGQUIT信号（**ngx_quit**）。发送SIGQUIT/NGX_CMD_QUIT信号给所有woker进程，并关闭监听端口。
 
 处理SIGHUP信号（ngx_reconfigure）。
-- 如果ngx_new_binary不为0，则调用ngx_start_worker_processes（NGX_PROCESS_RESPAWN）、ngx_start_cache_manager_processes（NGX_PROCESS_RESPAWN）。
-- 如果ngx_new_binary为0，则调用ngx_init_cycle、ngx_start_worker_processes（NGX_PROCESS_JUST_RESPAWN）、ngx_start_cache_manager_processes（NGX_PROCESS_JUST_RESPAWN）。
+- 如果ngx_new_binary不为0，则调用ngx_start_worker_processes（**NGX_PROCESS_RESPAWN**）、ngx_start_cache_manager_processes（**NGX_PROCESS_RESPAWN**）。
+- 如果ngx_new_binary为0，则调用ngx_init_cycle、ngx_start_worker_processes（**NGX_PROCESS_JUST_RESPAWN**）、ngx_start_cache_manager_processes（**NGX_PROCESS_JUST_RESPAWN**）。
 - 睡眠100ms让新进程启动。
 - 发送信号（NGX_SHUTDOWN_SIGNAL/SIGQUIT/NGX_CMD_QUIT）给所有子进程。
 
-处理ngx_restart，调用ngx_start_worker_processes启动新woker进程（NGX_PROCESS_RESPAWN），调用**ngx_start_cache_manager_processes启动新manger和loader进程**。
+处理ngx_restart，调用ngx_start_worker_processes启动新woker进程（**NGX_PROCESS_RESPAWN**），调用**ngx_start_cache_manager_processes启动新manger和loader进程**。
 
 处理SIGINFO信号（**ngx_reopen**），重新打开open_file设置用户属性，并发送相应信号（NGX_REOPEN_SIGNAL/SIGINFO/NGX_CMD_REOPEN）给所有woker进程。
 
