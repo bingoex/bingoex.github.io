@@ -6,6 +6,7 @@ description:
 keywords: 
 ---
 
+记录些常用的语法，好记性不如烂笔头。
 
 
 # 基本语法
