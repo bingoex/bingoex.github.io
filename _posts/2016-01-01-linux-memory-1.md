@@ -61,7 +61,7 @@ Buffer cache则主要是设计用来在系统对块设备进行读写的时候�
 
 **PSS**:(Proportionalset sizes) : 进程实际使用的内存，与RSS最主要的区别在是共享内存大小的计算会在多个attatch进程之间均分。因此，PSS能比较好的衡量一个进程实际占用的物理内存大小。(PSS是开源工具sem最先提出的概念，由于很有用该工具已经被BSD内核的系统集成到内核。
 
-cat/proc/pid/smaps  //也可查看PSS
+cat /proc/pid/smaps  //也可查看PSS
 
 ![](/images/posts/2016-01-01-linux-memory-1/2.png)
 
@@ -86,8 +86,8 @@ systemV共享内存页数：1163012页（每页4K * 1163012 = 4652048K）
 
 #### POSIX共享内存
 ```shell
-ll-l /dev/shm/|grep -v 'total' | awk 'BEGIN{sum=0}{sum+=$5;}END{printsum/1024/1024/1024"G"}'
-du-sm /dev/shm
+ll -l /dev/shm/|grep -v 'total' | awk 'BEGIN{sum=0}{sum+=$5;}END{printsum/1024/1024/1024"G"}'
+du -sm /dev/shm
 ```
 
 
