@@ -10,7 +10,7 @@ keywords: Linux, 内存, 优化, 内核参数, 系统调优
 
 # free命令
 ![](/images/posts/2016-01-01-linux-memory-1/1.png)
-进程使用内存1.46G。Buffer、Cached使用内存6.2G。但Buffer、Cache这部分空闲内存不一定能够被回收供进程使用（如共享内存、动态库等），详情请看下文
+进程使用内存1.46G。Buffer、Cached使用内存6.2G。但**Buffer、Cache这部分空闲内存不一定能够被回收供进程使用**（如共享内存、动态库等），详情请看下文
 
 
  
@@ -28,7 +28,7 @@ Buffer cache则主要是设计用来在系统对块设备进行读写的时候�
 
 
 # 何时回收cache
-- 内存将要耗尽的时候，触发内存回收的工作，以便释放出内存给急需内存的进程使用。
+- **内存将要耗尽的时候，触发内存回收的工作，以便释放出内存给急需内存的进程使用**。
 - 伴随着cache清除的行为的，一般都是系统IO飙高。因为内核要对比cache中的数据和对应硬盘文件上的数据是否一致，如果不一致需要写回，之后才能回收。
 
 
@@ -70,14 +70,14 @@ cat/proc/pid/smaps  //也可查看PSS
 # 如何查看系统共享内存
 #### systemV共享内存
 ```shell
-ipcs-m |grep -vP 'Shared|key' | awk 'BEGIN{sum=0}{sum+=$5;print $1"  --- " $5/1024/1024} END{print sum/1024/1024}'
-ipcs-mu
+ipcs -m |grep -vP 'Shared|key' | awk 'BEGIN{sum=0}{sum+=$5;print $1"  --- " $5/1024/1024} END{print sum/1024/1024}'
+ipcs -mu
 ```
 
 ```shell
 [root@lang]#/usr/bin/ipcs -mu|/bin/egrep '^(segments allocated|pages allocated)'
-segmentsallocated 322
-pagesallocated 1163012
+segments allocated 322
+pages allocated 1163012
 ```
 
 systemV共享内存个数：322
@@ -94,7 +94,7 @@ du-sm /dev/shm
 
 # 如何查看单进程内存使用情况(pmap命令)
 ```shell
-pmap-x 23809 | grep -P 'anon' | awk 'BEGIN{sum1=0;sum2=0} {sum1+=$2; sum2+=$3}END{printsum1" "sum2}'
+pmap -x 23809 | grep -P 'anon' | awk 'BEGIN{sum1=0;sum2=0} {sum1+=$2; sum2+=$3}END{printsum1" "sum2}'
 ```
 
 
@@ -107,7 +107,7 @@ pmap-x 23809 | grep -P 'anon' | awk 'BEGIN{sum1=0;sum2=0} {sum1+=$2; sum2+=$3}EN
 # swap
 #### 如何手动清除swap
 ```shell
-swapoff-a && swapon –a
+swapoff -a && swapon –a
 ```
 
 #### swap系统调参数
@@ -128,8 +128,8 @@ swapoff-a && swapon –a
 # valgrind
 使用valgrind的massif可以查看程序动态使用内存的情况
 ```shell
-valgrind--tool=massif ./你的二进制程序
-ms_printmassif.out.1285 > /tmp/a.txt //
+valgrind --tool=massif ./你的二进制程序
+ms_print massif.out.1285 > /tmp/a.txt //
 ```
 ![](/images/posts/2016-01-01-linux-memory-1/3.png)
 
