@@ -14,11 +14,11 @@ keywords:
 
 # pthread_detach
 
-如果线程是joinable状态，当线程函数自己返回退出时或pthread_exit时都不会释放线程所占用堆栈和线程描述符（总计8K多）。只有当你调用了pthread_join之后这些资源才会被释放。 
+如果线程是**joinable**状态，当线程函数自己返回退出时或pthread_exit时都**不会释放**线程所占用堆栈和线程描述符（总计8K多）。只有当你调用了**pthread_join之后这些资源才会被释放**。 
 
-若是unjoinable状态的线程，这些资源在线程函数退出时或pthread_exit时自动会被释放。
+若是**unjoinable**状态的线程，这些资源在线程函数退出时或pthread_exit时**自动会被释放**。
 
-unjoinable属性可以在pthread_create时指定，或在线程创建后在线程中pthread_detach自己,如：pthread_detach(pthread_self())，将状态改为unjoinable状态，确保资源的释放。或者将线程置为joinable,然后适时调用pthread_join。
+unjoinable属性可以在pthread_create时指定，或在线程创建后在线程中pthread_detach自己,如：**pthread_detach(pthread_self())，将状态改为unjoinable状态**，确保资源的释放。或者将线程置为joinable,然后适时调用pthread_join。
 
 
 
@@ -93,21 +93,21 @@ int main ()    {
 
 # 线程和fork()
 
-当在多线程进程中调用fork()，只有调用fork()的线程被复制到子进程。
+当在**多线程进程中调用fork()，只有调用fork()的线程被复制到子进程**。
 
-虽然只有调用fork()的线程被复制到子进程，但是子进程的全局变量，互斥量，条件变量的状态都将和在父进程中的一样。也就是说，如果它在父进程中被锁住，则它在子进程中也是被锁住的。
+虽然只有调用fork()的线程被复制到子进程，但是子进程的**全局变量，互斥量，条件变量的状态都将和在父进程中的一样**。也就是说，如果它在父进程中被锁住，则它在子进程中也是被锁住的。
 
-thread-specific data的销毁函数和清除函数都不会被调用。在多线程中调用fork()可能会引起内存泄露。比如在其他线程中创建的thread-specific data，在子进程中将没有指针来存取这些数据，造成内存泄露。
+**thread-specific data的销毁函数和清除函数都不会被调用**。在多线程中调用fork()可能会**引起内存泄露**。比如在其他线程中创建的thread-specific data，在子进程中将没有指针来存取这些数据，造成内存泄露。
 
-因为以上这些问题，在线程中调用fork()的后，我们通常都会在子进程中调用exec()。因为exec()能让父进程中的所有互斥量，条件变量（pthread objects）在子进程中统统消失（用新数据覆盖所有的内存）。
+因为以上这些问题，在线程中调用fork()的后，我们通常都会在子进程中调用exec()。因为**exec()能让父进程中的所有互斥量，条件变量（pthread objects）在子进程中统统消失（用新数据覆盖所有的内存）**。
 
-应该避免在一个多线程的程序中使用fork。
+应该**避免在一个多线程的程序中使用fork**。
 
 
 
 # 线程取消选项
 
-可取消状态属性可以是PTHREAD_CANCEL_ENABLE和PTHREAD_CANCEL_DISABLE，线程可以通过调用pthread_setcancelstate修改它的可取消状态。
+**可取消状态属性**可以是PTHREAD_CANCEL_ENABLE和PTHREAD_CANCEL_DISABLE，线程可以通过调用pthread_setcancelstate修改它的可取消状态。
 
 ```c
 #include<pthread.h>  
@@ -115,7 +115,7 @@ int pthread_setcancelstate(int state, int *oldstate); //成功则返回0，否�
 ```
 pthread_setcancelstate把当前可取消状态设置为state，把原来的可取消状态存放在oldstate指向的内存单元中，这两步是原子操作。
 
-pthread_cancel并不等待线程终止，在默认情况下，线程在取消请求发出以后还是继续运行，直到线程到达某个取消点。
+pthread_cancel并不等待线程终止，在默认情况下，**线程在取消请求发出以后还是继续运行，直到线程到达某个取消点**。
 
 取消点是线程检查是否被取消并按照请求进行动作的一个位置。POSIX.1保证在下表中列出的任何函数，取消点都会出现。
 
@@ -127,27 +127,27 @@ pthread_cancel并不等待线程终止，在默认情况下，线程在取消请
 
 线程启动是默认的可取消状态是PTHREAD_CANCEL_ENABLE。当状态设为PTHREAD_CANCEL_DISABLE时，对pthread_cancel的调用并不会杀死线程，相反，取消请求对这个线程来说处于未决状态。当取消状态再次变成PTHREAD_CANCEL_ENABLE时，线程将在下一个取消点上对所有未决的取消请求进行处理。
 
-如果应用程序在很长一段时间内都不会调用到上面的函数，那么可以调用pthread_testcancel函数在程序中自己添加取消点。
+如果应用程序在很长一段时间内都不会调用到上面的函数，那么可以调用pthread_testcancel函数在程序中**自己添加取消点**。
 ```c
 #include<pthread.h>  
 void pthread_testcancel(void); 
 ```
 调用pthread_testcancel时，如果有个取消请求正处于未决状态，而且取消并没有设置为无效，那么线程就会被取消。但是如果取消被置成无效，pthread_testcancel调用就没有任何效果。
 
-上述述的默认取消类型也称为延迟取消，调用pthread_cancel以后，在线程到达取消点之前，并不会出现真正的取消，可以通过调用pthread_setcanceltype来修改取消类型。
+上述述的**默认取消类型也称为延迟取消**，调用pthread_cancel以后，在线程到达取消点之前，并不会出现真正的取消，可以通过调用pthread_setcanceltype来修改取消类型。
 ```c
 #include<pthread.h>  
 int pthread_setcanceltype(int type, int *oldtype); //成功则返回0，否则返回错误编号。  
 ```
 type参数可以是PTHERAD_CANCEL_DEFERRED（延迟取消）或PTHREAD_CANCEL_ASYNCHRONOUS（异步取消），
 
-使用异步取消时，线程可以在任何时间取消，而不是非要等到遇到取消点才能被取消。
+**使用异步取消时，线程可以在任何时间取消，而不是非要等到遇到取消点才能被取消**。
 
 
 
 # 线程锁
 
-<http://blog.csdn.net/b2222505/article/details/78232678>
+<https://bingoex.github.io/2015/12/01/linux-lock/>
 
 
 
