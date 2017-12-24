@@ -62,7 +62,7 @@ Linux系统当出现内存吃紧时，到底会选择释放内存还是Swap内�
 
 #### Swap的启动与关闭
 ```shell
- swapoff-a && swapon -a
+swapoff -a && swapon -a
 ``` 
 #### 如何查看进程使用的Swap
 ```shell
