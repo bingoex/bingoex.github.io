@@ -66,7 +66,7 @@ HttpOnly属性：Cookie添加HttpOnly属性，使得攻击者无法通过JavaScr
 
 Referer源检查：Http请求头的Referer域中记录着请求来源，通过检查请求来源判断请求是否合法。
 
-http://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html
+<http://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html>
 
 
 
