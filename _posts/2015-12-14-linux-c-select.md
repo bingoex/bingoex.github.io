@@ -6,13 +6,14 @@ description:
 keywords: 
 ---
 
+本文对select、pselect、poll、epoll作简单的介绍
 
 # select、pselect
 ```c
 int select(int n, fd_set *readfds,fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);
 int pselect(int n, fd_set *readfds,fd_set *writefds, fd_set *exceptfds, const struct timespec *timeout, constsigset_t *sigmask);
 ```
-select和pselect都是等待一系列的文件描述符（int）的状态发生变化。
+select和pselect都是等待一系列的文件描述符（fd）的状态发生变化。
 
 这两个函数基本上是一致，但是有三个区别：
 1. select函数用的timeout参数是timeval的结构体（包含秒和微秒），而pselect用的是timespec结构体（包含秒和纳秒），更精确。
@@ -30,7 +31,7 @@ select和pselect都是等待一系列的文件描述符（int）的状态发生�
 跟select差不多，只是API优化了。且没有fd监听数量的限制。
 
 缺点：
-1、函数返回后，需要全量遍历所有的fd，询问是否有事件发生，在fd较多的时候性能较差。
+1. 函数返回后，需要全量遍历所有的fd，询问是否有事件发生，在fd较多的时候性能较差。
 
 
 
