@@ -38,8 +38,8 @@ RLIMIT_STACK //最大的进程堆栈，以字节为单位。
  
 ```c
 struct rlimit {
-    　　rlim_t rlim_cur;
-    　　rlim_t rlim_max;
+    rlim_t rlim_cur;
+    rlim_t rlim_max;
 };
 ```
 
