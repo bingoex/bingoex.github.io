@@ -9,13 +9,13 @@ keywords:
 
 # 信号
 
-当引发信号的事件发生时，为进程产生一个信号（信号产生）（或向进程发送一个信号）。事件可以是硬件异常、软件条件、终端产生的信号或调用kill函数。
+当引发信号的事件发生时，为进程产生一个信号（**信号产生**）（或向进程发送一个信号）。事件可以是硬件异常、软件条件、终端产生的信号或调用kill函数。
 
-在产生了信号时，内核通常在进程表中设置一个某种形式的标志（信号递送）。当对信号采取了这种动作时，我们说向进程递送了一个信号。
+在产生了信号时，内核通常在进程表中设置一个某种形式的标志（**信号递送**）。当对信号采取了这种动作时，我们说向进程递送了一个信号。
 
-在信号产生（generation）和递送（delivery）之间的时间间隔，称信号是未决的（pending）。
+在信号产生（generation）和递送（delivery）之间的时间间隔，称**信号是未决的**（pending）。
 
-进程可以选用信号递送阻塞。如果为进程产生了一个选择为阻塞的信号，而且对该信号的动作是系统默认动作或捕捉该信号，则为该进程将此信号保持为未决状态，直到该进程对此信号解除了阻塞，或者将对此信号的动作更改为忽略。
+进程可以选用信号递送阻塞。如果为进程产生了一个选择为阻塞的信号，而且对该信号的动作是系统默认动作或捕捉该信号，则为该进程**将此信号保持为未决状态，直到该进程对此信号解除了阻塞**，或者将对此信号的动作更改为忽略。
 
 内核在递送一个原来被阻塞（现在解除了阻塞）的信号给进程时，才决定对它的处理方式。于是进程在信号递送给它之前仍可改变对该信号的动作。
 
@@ -28,11 +28,11 @@ keywords:
 ## 信号与线程的关系
 
 一般我们谈到信号时，都是只与进程挂钩的（多进程设计模式），很少会在线程中使用信号。
-如果一个没有处理的信号的默认动作是停止SIGSTOP或终止SIGKILL，那么不管这个信号是发送给哪个线程，整个进程都会停止或终止。
+如果一个没有处理的信号的**默认动作是停止SIGSTOP或终止SIGKILL，那么不管这个信号是发送给哪个线程，整个进程都会停止或终止**。
 
-一个进程中的所有线程对某个信号都共享相同的信号处理函数。
+一个进程中的**所有线程对某个信号都共享相同的信号处理函数**。
 
-使用pthread_kill()或者pthread_sigqueue()。这些函数允许一个线程发送信号到另一个线程（同一进程中）。其他情况都是把信号发送到整个进程（比如，kill()和sigqueue()）。当一个信号被发送到一个多线程的进程中（注意是发送到进程）。内核会选择该进程中的任意线程来处理该信号。这种做法是为了保持进程中信号的语意，保证不会在多线程进程中一个信号多次被执行。
+**使用pthread_kill()或者pthread_sigqueue()。这些函数允许一个线程发送信号到另一个线程**（同一进程中）。其他情况都是把信号发送到整个进程（比如，kill()和sigqueue()）。**当一个信号被发送到一个多线程的进程中（注意是发送到进程）。内核会选择该进程中的任意线程来处理该信号**。这种做法是为了保持进程中信号的语意，保证不会在多线程进程中一个信号多次被执行。
 
 ## 常用API
 ```c
@@ -42,9 +42,9 @@ int pthread_sigqueue(pthread_t thread, int sig, constunion sigval value)
 int sigwait(const sigset_t *set, int *sig)
 ```
 
-线程可以使用pthread_sigmask()来独立的屏蔽某些信号。通过这种方法，程序员可以控制那些线程响应那些信号。当线程被创建时，它将继承创建它的线程的信号掩码
+线程可以使用pthread_sigmask()来独立的**屏蔽某些信号**。通过这种方法，程序员可以控制那些线程响应那些信号。当线程被创建时，它将继承创建它的线程的信号掩码
 
-信号处理函数中不要使用线程不安全的函数（如pthread）
+**信号处理函数中不要使用线程不安全的函数（如pthread）**
 在处理信号之前，对所有的异步信号进行阻塞，等工作处理完毕后，再恢复阻塞的信号。
 
 ## 缺点
@@ -57,7 +57,7 @@ int sigwait(const sigset_t *set, int *sig)
 
 # 共享内存
 
-共享内存就是允许多个不相关的进程访问同一个逻辑内存。是最快的工程间通信方式。
+共享内存就是允许**多个不相关的进程访问同一个逻辑内存**。是最快的工程间通信方式。
 
 共享内存并未提供同步机制，也就是说，在第一个进程结束对共享内存的写操作之前，并无自动机制可以阻止第二个进程开始对它进行读取。所以我们通常需要用其他的机制来同步对共享内存的访问，例如前面说到的信号量。
 
@@ -69,7 +69,7 @@ int sigwait(const sigset_t *set, int *sig)
 ```c
 void *mmap( void *start, size_tlength, int port, int flags, int fd, off_t offset)
 ```
-flags : 映射文件属性值，可取 MAP_ANON, MAP_PRIVATE, MAP_SHARED，分别代表匿名映射，私有copy-on-write映射，和共享映射。映射的初期并没有 真正分配内存，只有访问页面的时候，引发一个缺页异常，这时才真正分配内存。
+flags : 映射文件属性值，可取 MAP_ANON, MAP_PRIVATE, MAP_SHARED，分别代表**匿名映射，私有copy-on-write映射，和共享映射**。映射的初期并没有 真正分配内存，只有访问页面的时候，引发一个缺页异常，这时才真正分配内存。
 
 
 
@@ -82,7 +82,7 @@ flags : 映射文件属性值，可取 MAP_ANON, MAP_PRIVATE, MAP_SHARED，分�
 
 ## 原理
 
-在Linux中，使用两个file数据结构来实现管道。这两个file数据结构中的f_inode指针指向同一个临时创建的VFS I节点，而该VFS I节点本身又指向内存中的一个物理页，如图所示。两个file数据结构中的f_op指针指向不同的文件操作例程向量表：一个用于向管道中写，另一个用于从管道中读。这种实现方法掩盖了底层实现的差异，从进程的角度来看，读写管道的系统调用和读写普通文件的普通系统调用没什么不同。当写进程向管道中写时，字节被拷贝到了共享数据页，当读进程从管道中读时，字节被从共享页中拷贝出来。Linux必须同步对于管道的存取，必须保证管道的写和读步调一致。Linux使用锁、等待队列和信号（locks，wait queues and signals）来实现同步。
+在Linux中，使用两个file数据结构来实现管道。这两个file数据结构中的f_inode指针指向同一个**临时创建的VFS I节点**，而该VFS I节点本身又**指向内存中的一个物理页**，如图所示。两个file数据结构中的f_op指针指向不同的文件操作例程向量表：一个用于向管道中写，另一个用于从管道中读。这种实现方法掩盖了底层实现的差异，从进程的角度来看，读写管道的系统调用和读写普通文件的普通系统调用没什么不同。当写进程向管道中写时，字节被拷贝到了共享数据页，当读进程从管道中读时，字节被从共享页中拷贝出来。Linux必须同步对于管道的存取，必须保证管道的写和读步调一致。Linux使用锁、等待队列和信号（locks，wait queues and signals）来实现同步。
 
 ![](/images/posts/2015-12-14-linux-c-process.md/1.png)
 
@@ -90,7 +90,7 @@ flags : 映射文件属性值，可取 MAP_ANON, MAP_PRIVATE, MAP_SHARED，分�
 
 ## 命名管道
 
-命名管道是一种特殊类型的文件（调用mkfifo会产生一个文件），因为Linux中所有事物都是文件，它在文件系统中以文件名的形式存在。程序不能是O_RDWR模式打开FIFO文件进行读写操作，这样做的后果未明确定义，只能一读一写。
+命名管道是一种特殊类型的文件（调用**mkfifo**会产生一个文件），因为Linux中所有事物都是文件，它在文件系统中以文件名的形式存在。程序不能是O_RDWR模式打开FIFO文件进行读写操作，这样做的后果未明确定义，**只能一读一写**。
 ```c
 #include <stdio.h>  
 #include <stdlib.h>  
@@ -186,12 +186,12 @@ int main() {
 
 ## 协同进程
 
-当一个程序产生某个过滤程序的输入，同时又读取该过滤程序的输出时，则该过滤程序就成为协同进程(coprocess)。
+当一个程序产生某个过滤程序的输入，同时又读取该过滤程序的输出时，则该过滤程序就成为**协同进程(coprocess)**。
 
 ![](/images/posts/2015-12-14-linux-c-process.md/2.png)
 
 ```c
-/*****filter.c
+//filter.c
 #include <errno.h>
 #include <fcntl.h>
 #include <sys/wait.h>
@@ -200,22 +200,24 @@ int main() {
 #include <stdio.h>
 #define MAXLINE 128
 int main(void){
-int     n,  int1, int2;
-char    line[MAXLINE];
-while ((n = read(STDIN_FILENO, line, MAXLINE)) > 0) {
-line[n] = 0;        /* null terminate */
-if (sscanf(line, "%d%d", &int1, &int2) == 2) {
-    sprintf(line, "%d/n", int1 + int2);
-    n = strlen(line);
-    if (write(STDOUT_FILENO, line, n) != n)
-        printf("write error/n");
-} else {
-    if (write(STDOUT_FILENO, "invalid args/n", 13) != 13)
-        printf("write error/n");
+    int     n,  int1, int2;
+    char    line[MAXLINE];
+    while ((n = read(STDIN_FILENO, line, MAXLINE)) > 0) {
+        line[n] = 0;        /* null terminate */
+        if (sscanf(line, "%d%d", &int1, &int2) == 2) {
+            sprintf(line, "%d/n", int1 + int2);
+            n = strlen(line);
+            if (write(STDOUT_FILENO, line, n) != n)
+                printf("write error/n");
+        } else {
+            if (write(STDOUT_FILENO, "invalid args/n", 13) != 13)
+                printf("write error/n");
+        }
+    }
+
+    exit(0);
 }
-}
-exit(0);
-}
+
 运行：
 [root@localhost yuan]# gcc -o filterd filterd.c
 [root@localhost yuan]# ./filterd
@@ -225,7 +227,7 @@ exit(0);
 
 示例2：驱动上述过滤程序filter.c的程序
 ```c
-/*****filterd.c
+//filterd.c
 #include <errno.h>
 #include <fcntl.h>
 #include <sys/wait.h>
@@ -263,8 +265,10 @@ int main(void){
             if (fputs(line, stdout) == EOF)
                 printf("fputs error/n");
         }
+
         if (ferror(stdin))
             printf("fgets error on stdin/n");
+
         exit(0);
     } else {
         printf("child process/n");                /* child */
@@ -275,14 +279,17 @@ int main(void){
                 printf("dup2 error to stdin/n");
             close(fd1[0]);
         }
+
         if (fd2[1] != STDOUT_FILENO) {
             if (dup2(fd2[1], STDOUT_FILENO) != STDOUT_FILENO)
                 printf("dup2 error to stdout/n");
             close(fd2[1]);
         }
+
         if (execl("./filter", "filter", (char *)0) < 0)
             printf("execl error/n");
     }
+
     exit(0);
 }
 
@@ -291,6 +298,7 @@ static void sig_pipe(int signo)
     printf("SIGPIPE caught/n");
     exit(1);
 }
+
 运行：filter存在
 [root@localhost yuan]# gcc -o filterd filterd.c
 [root@localhost yuan]# ./filterd
@@ -302,11 +310,9 @@ parent process
 
 ## 缺点
 
-因为读数据的同时也将数据从管道移去，因此，管道不能用来对多个接收者广播数据。
-
-管道中的数据被当作字节流，因此无法识别信息的边界。
-
-如果一个管道有多个读进程，那么写进程不能发送数据到指定的读进程。同样，如果有多个写进程，那么没有办法判断是它们中那一个发送的数据
+- 因为读数据的同时也将数据从管道移去，因此，管道不能用来对多个接收者广播数据。
+- 管道中的数据被当作字节流，因此无法识别信息的边界。
+- 如果一个管道有多个读进程，那么写进程不能发送数据到指定的读进程。同样，如果有多个写进程，那么没有办法判断是它们中那一个发送的数据
 
 
 
