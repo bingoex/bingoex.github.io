@@ -8,7 +8,7 @@ keywords:
 
 
 ```c
-realloc(void *__ptr, size_t __size)：
+realloc(void *__ptr, size_t __size)
 ```
 更改已经配置的内存空间，即更改由malloc()函数分配的内存空间的大小。
 
