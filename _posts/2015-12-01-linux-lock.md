@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux锁机制
-categories: Linux C/C++
+categories: Linux C/C++ 操作系统原理
 description: 
 keywords: 
 ---
