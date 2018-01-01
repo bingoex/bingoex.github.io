@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 一致性hash算法
-categories: 算法/算法 计算机网络 系统架构
+categories: 数学/算法 计算机网络 系统架构
 description: 
 keywords: 
 ---
