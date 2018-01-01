@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Nginx源码浅析－常用数据结构
-categories: Nginx
+categories: Nginx 数据结构
 description: nginx源码浅析--常用数据结构
 keywords: 
 ---
