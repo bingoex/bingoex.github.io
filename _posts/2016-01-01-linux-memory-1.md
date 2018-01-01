@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux内存浅析
-categories: Linux 性能优化
+categories: Linux 优化
 description: Linux内存浅析
 keywords: Linux, 内存, 优化, 内核参数, 系统调优
 ---

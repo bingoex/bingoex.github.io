@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 内存优化的那些事【C/C++】
+title: C/C++内存优化的那些事
 categories: 优化 C/C++
 description: 
 keywords: 

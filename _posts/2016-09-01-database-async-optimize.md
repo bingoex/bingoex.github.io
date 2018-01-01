@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 性能优化之数据库操作异步化
-categories: 性能优化
+categories: 优化
 description: 性能优化之数据库操作异步化
 keywords: 
 ---
