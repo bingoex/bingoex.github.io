@@ -13,9 +13,8 @@ keywords:
  
 尽量减少swap或把swap关掉。
 
-<http://blog.csdn.net/b2222505/article/details/60324150>
-
-<http://blog.csdn.net/b2222505/article/details/54144353>
+<https://bingoex.github.io/2016/08/02/linux-memory-2/>
+<https://bingoex.github.io/2016/01/01/linux-memory-1/>
 
 
 
@@ -24,7 +23,7 @@ keywords:
 
 通常情况下对于大块内存的频繁访问，可以采用大页表减少页表条目，提高内存查询速度
 
-cat /proc/meminfo|grep "HugePages"可以查看大页表的状态
+`cat /proc/meminfo|grep "HugePages"`可以查看大页表的状态
  
 减少了内存页表项的缓存压力和CPU cache缓存内存地质映射的压力，提高了寻址能力和内存管理效率。大页内存还有其他一些使用时需要注意的地方：
 - 大页内存不能交换（SWAP）.
@@ -44,7 +43,7 @@ cat /proc/meminfo|grep "HugePages"可以查看大页表的状态
  
 
 
-<http://blog.csdn.net/b2222505/article/details/72615009>
+<https://bingoex.github.io/2015/09/05/linux-memory-3/>
 
 
 
