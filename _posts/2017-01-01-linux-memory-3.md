@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Linux内存布局、内存分配原理
+title: 【精品】Linux内存布局、内存分配原理
 categories: Linux 操作系统原理
 description: Linux内存布局、内存分配原理
 keywords: Linux内存布局, 内存分配原理

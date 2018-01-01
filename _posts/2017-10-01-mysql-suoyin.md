@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 浅谈数据库索引
+title: 【精品】浅谈数据库索引
 categories: 数据库 优化
 description: 
 keywords: 

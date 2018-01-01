@@ -1,6 +1,6 @@
 ---
 layout: post
-title: RocketMQ简介
+title: 【精品】RocketMQ简介
 categories: Java 系统架构
 description: 
 keywords: 

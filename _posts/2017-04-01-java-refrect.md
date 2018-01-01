@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Java泛型理解
+title: 【精品】Java泛型理解
 categories: Java
 description: 
 keywords: 

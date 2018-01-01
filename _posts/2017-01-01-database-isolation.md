@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 事务的隔离性
+title: 【精品】事务的隔离性
 categories: 数据库
 description: 事务的隔离性
 keywords: 事务的隔离性, 隔离性

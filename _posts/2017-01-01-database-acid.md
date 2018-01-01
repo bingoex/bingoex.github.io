@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 事务的ACID
+title: 【精品】事务的ACID
 categories: 数据库
 description: 事务的ACID
 keywords: ACID, 数据库ACID

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: free命令引发的思考
+title: 【精品】free命令引发的思考
 categories: Linux
 description: free命令引发的思考
 keywords: free, swap, 内存优化
