@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux下开发－exec
-categories: Linux C/C++
+categories:  C/C++
 description: 
 keywords: 
 ---

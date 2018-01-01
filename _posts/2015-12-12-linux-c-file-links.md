@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux下开发－揭秘文件链接数
-categories: Linux C/C++
+categories:  C/C++
 description: 
 keywords: 
 ---

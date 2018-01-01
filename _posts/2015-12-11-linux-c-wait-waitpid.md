@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux下开发－wait和waitpid
-categories: Linux C/C++
+categories: C/C++
 description: 
 keywords: 
 ---

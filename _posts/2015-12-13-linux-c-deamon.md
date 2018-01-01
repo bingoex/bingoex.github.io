@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux下开发－守护进程（daemon）
-categories: Linux C/C++
+categories:  C/C++
 description: 
 keywords: 
 ---
