@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 网络质量预测算法
-categories: 计算机网络 数学 算法
+categories: 计算机网络 数学/算法
 description: 
 keywords: 
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 置信区间的应用－网络波动的判断
-categories: 数学 计算机网络 算法
+categories: 数学/算法 计算机网络 
 description: 
 keywords: 
 ---
