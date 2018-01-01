@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 数据库范式
+title: 【精品】数据库范式
 categories: 数据库
 description: 
 keywords: 
