@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux下开发－线程详解
-categories: Linux C/C++
+categories:  C/C++
 description: 
 keywords: 
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux下开发－资源详解
-categories: C/C++ Linux
+categories: C/C++ 
 description: 
 keywords: 
 ---
