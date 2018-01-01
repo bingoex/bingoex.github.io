@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 【精品】linux网络API细节
-categories: 
+categories:  C/C++
 description: 
 keywords: 
 ---

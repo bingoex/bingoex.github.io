@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 【精品】程序优化的那些事
-categories: 
+categories: 优化
 description: 
 keywords: 
 ---
