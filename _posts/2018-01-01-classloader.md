@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 【精品】类加载的过程
-categories: 
+categories: Java
 description: 
 keywords: 
 ---
