@@ -11,7 +11,7 @@ layout: default
           {% if page.date %}
           <span class="meta-info">
             <span class="octicon octicon-calendar"></span> {{ page.date | date: "%Y/%m/%d" }}
-            浏览量: <span data-hk-page="{{ post.url | prepend: site.url }}"> - </span>次
+            浏览量：<span data-hk-page="current"> - </span>次
           </span>
           {% endif %}
           {% for cat in page.categories %}
