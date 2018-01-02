@@ -44,6 +44,7 @@ comments: false
                     <p class="repo-list-meta">
                         <span class="meta-info">
                           <span class="octicon octicon-calendar"></span> {{ post.date | date: "%Y/%m/%d" }}
+                          浏览量:<span data-hk-page="{{ post.url | prepend: site.url }}"> - </span>次
                         </span>
                         {% for cat in post.categories %}
                         <span class="meta-info">

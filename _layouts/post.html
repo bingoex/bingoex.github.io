@@ -10,8 +10,8 @@ layout: default
         <div class="collection-info">
           {% if page.date %}
           <span class="meta-info">
-            <span class="octicon octicon-calendar"></span> {{ page.date | date: "%Y/%m/%d" }} | 
-            浏览量<span data-hk-page="current"> - </span>次
+            <span class="octicon octicon-calendar"></span> {{ page.date | date: "%Y/%m/%d" }} 
+            浏览量:<span data-hk-page="current"> - </span>次
           </span>
           {% endif %}
           {% for cat in page.categories %}
