@@ -47,6 +47,8 @@ comments: false
                     <p class="repo-list-meta">
                         <span class="meta-info">
                           <span class="octicon octicon-calendar"></span> {{ post.date | date: "%Y/%m/%d" }}
+                        </span>
+                        <span class="meta-info">
                           <span class="octicon octicon-eye"></span> <span data-hk-page="{{ post.url | prepend: site.url }}"> - </span>
                         </span>
                         {% for cat in post.categories %}
