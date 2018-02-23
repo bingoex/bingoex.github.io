@@ -230,6 +230,21 @@ public class DemoScheduleTaskListener implements ScheduleTaskListener {
 
 业务odps任务导入仍未支持，这个能力也需要补上。
 
+# 五、perceptor具体参数
+```
+业务数据
+消息qps：260/s（审核平台、发布任务结果，任务结果上报、数据库bin更改等消息）
+任务发布量qps：20/s（一天约130W新增任务）
+数据库操作qps：730/s
+数据库操作平均耗时：1～2ms
+
+
+7台机器（4核8G）
+CPU利用率5%、负载0.3
+JVM内存：4.5G（年轻代1G、metaspace150M、老年代1.5G左右开始清理、GC次数持续1次，每次10ms）
+网络流量：进（165k）、出（290K），包个数约700-800
+线程数500
+```
 
 # 参考资料
 <http://www.cnblogs.com/lingiu/p/3782813.html>
